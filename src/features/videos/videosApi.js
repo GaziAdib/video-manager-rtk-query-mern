@@ -7,6 +7,10 @@ export const videosApi = rootApi.injectEndpoints({
             query: () => '/videos',
         }),
 
+        fetchSingleVideo: builder.query({
+            query: (id) => `/videos/${id}`,
+        }),
+
         // create Video
         addVideos: builder.mutation({
             query: (data) => ({
@@ -19,4 +23,4 @@ export const videosApi = rootApi.injectEndpoints({
 })
 
 
-export const { useFetchVideosQuery, useAddVideosMutation } = videosApi
+export const { useFetchVideosQuery, useFetchSingleVideoQuery, useAddVideosMutation } = videosApi
