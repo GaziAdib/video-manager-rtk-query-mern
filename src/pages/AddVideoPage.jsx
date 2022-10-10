@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useAddVideosMutation } from '../features/videos/videosApi';
+import { useNavigate } from 'react-router-dom'
 
 const AddVideo = () => {
 
   const [addVideo] = useAddVideosMutation();
+
+  const navigate = useNavigate()
 
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
@@ -25,6 +28,8 @@ const AddVideo = () => {
       unlikeCount: 0
     })
 
+    navigate('/')
+    
   }
   
 
@@ -97,10 +102,10 @@ const AddVideo = () => {
     </div>
 
     <div className="flex items-center justify-between">
-                                        <button className="bg-blue hover:bg-blue-dark text-green font-bold w-full h-12 py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="submit">
-                                          add video
-                                        </button>
-                                      </div>
+          <button className="bg-blue-700 hover:bg-blue-dark text-green font-bold w-full h-12 py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="submit">
+            add video
+          </button>
+    </div>
     
   
     

@@ -67,6 +67,15 @@ const VideoCard = ({ video = {} }) => {
                 <p className="text-gray-400 text-xs mt-1">
                     {likeCount} likes .  {createdAt}
                 </p>
+              
+                {/* <button style={{ float: 'right'}} className="text-white rounded px-1 py-1 bg-red-600 mx-1 text-xs mt-1">
+                    Delete
+                </button>
+
+                <button style={{ float: 'right'}} className="text-white rounded px-1 py-1 bg-red-600 text-xs mx-1 mt-1">
+                    Edit
+                </button>   */}
+                
             </div>
         </div>
     </div>

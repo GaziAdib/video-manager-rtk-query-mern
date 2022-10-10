@@ -1,9 +1,25 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useDeleteVideoMutation } from '../../features/videos/videosApi';
 import LikeUnlike from './LikeUnlike'
 
 const VideoDescription = ({ video }) => {
 
  const { title, createdAt, description, likeCount, unlikeCount, _id } = video || {};
+
+ const [deleteVideo] = useDeleteVideoMutation() || {};
+
+const navigate = useNavigate();
+
+
+
+ // function to delete video
+
+ const deleteVideoHandler = (e) => {
+    deleteVideo(_id);
+    navigate('/');
+
+ }
 
 
   return (
@@ -23,7 +39,7 @@ const VideoDescription = ({ video }) => {
         </h2>
 
       
-        <LikeUnlike _id={_id} likeCount={likeCount} unlikeCount={unlikeCount} />
+    <LikeUnlike _id={_id} likeCount={likeCount} unlikeCount={unlikeCount} />
         
 
     </div>
@@ -33,6 +49,14 @@ const VideoDescription = ({ video }) => {
     >
         {description}
     </div>
+
+        <button onClick={deleteVideoHandler} style={{ float: 'right'}} className="text-white rounded px-2 py-1 bg-red-600 mx-1 text-xs mt-1">
+            Delete
+        </button>
+
+        <button style={{ float: 'right'}} className="text-white rounded px-2 py-1 bg-blue-600 text-xs mx-1 mt-1">
+            Edit
+        </button>  
 </div>
   )
 }

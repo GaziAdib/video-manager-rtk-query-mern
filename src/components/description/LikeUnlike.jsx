@@ -1,9 +1,9 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import likeImage from '../../assets/like.svg';
 import unlikeImage from '../../assets/unlike.svg'
+import { useIncreaseLikeCountMutation } from '../../features/videos/videosApi';
 // import { updateVideoLikeCount, updateVideoUnLikeCount } from '../../features/video/videoSlice'
 
 
@@ -11,13 +11,17 @@ const LikeUnlike = ({ likeCount, unlikeCount }) => {
 
     const { videoId } = useParams();
 
+    const [increaseLikeCount] = useIncreaseLikeCountMutation() || {};
+
     // var dispatch = useDispatch();
 
-    // const likeIncreaseHandler = () => {
+    const likeIncreaseHandler = () => {
 
-    //     dispatch(updateVideoLikeCount({id: videoId, likes: likes + 1}))
+        increaseLikeCount({videoId: videoId, likeCount: likeCount + 1})
+
+        //dispatch(updateVideoLikeCount({id: videoId, likes: likes + 1}))
     
-    // }
+    }
 
     // const UnlikeIncreaseHandler = () => {
     //     dispatch(updateVideoUnLikeCount({id: videoId, unlikes: unlikes + 1}))
@@ -29,7 +33,7 @@ const LikeUnlike = ({ likeCount, unlikeCount }) => {
     <div className="flex gap-1">
         <div className="shrink-0">
             <img
-                // onClick={likeIncreaseHandler}
+                onClick={likeIncreaseHandler}
                 className="w-5 block"
                 src={likeImage}
                 alt="Like"
