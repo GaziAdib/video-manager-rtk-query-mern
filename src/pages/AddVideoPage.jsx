@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom'
 
 const AddVideo = () => {
 
-  const [addVideo] = useAddVideosMutation();
+  const [addVideo, {isSuccess}] = useAddVideosMutation();
+
+  // notification
+  const [showNotification, setShowNotification] = useState('')
+  // notification
 
   const navigate = useNavigate()
 
@@ -28,6 +32,28 @@ const AddVideo = () => {
       unlikeCount: 0
     })
 
+   
+    // send notification that new video added
+
+      const sendNotification = () => {
+        Notification.requestPermission().then(n => {
+          if(n === 'granted') {
+           const notification = new Notification(`Video with title ${title} Added Successfully`, {
+              body: "Awesome Video Added By Adib Author",
+              data: { videoTitle: `Video with title: ${title} Added Successfully` }
+            })
+
+            // console.log(notification.data)
+
+           setShowNotification(notification.data.videoTitle)
+          }
+        })
+      }
+
+      sendNotification()
+
+  
+
     navigate('/')
     
   }
@@ -35,6 +61,7 @@ const AddVideo = () => {
 
   return (
   <div className="w-full max-w-xs mx-auto pt-2 pb-2 my-2">
+    {showNotification}
   <form onSubmit={submitHandler} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
     <div className="mb-4">
       <label className="block text-gray-700 text-sm font-bold mb-2" for="title">
