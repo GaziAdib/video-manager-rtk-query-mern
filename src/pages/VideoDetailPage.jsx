@@ -2,6 +2,8 @@ import React from 'react'
 //import { useEffect } from 'react'
 //import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import AddCommentForm from '../components/description/AddCommentForm';
+import CommentLists from '../components/description/CommentLists';
 import VideoPlayer from '../components/description/Player'
 import VideoDescription from '../components/description/VideoDescription'
 //import RelatedVideoList from '../components/list/RelatedVideoList'
@@ -10,7 +12,7 @@ import Loading from '../components/ui/Loading';
 import { useFetchSingleVideoQuery } from '../features/videos/videosApi';
 
 
-const Video = () => {
+const VideoDetailPage = () => {
 
 // const {video, isLoading, isError, error} = useSelector(state => state.video)
 
@@ -22,12 +24,6 @@ const Video = () => {
 
 
  const {data: video, isError, isLoading, error} = useFetchSingleVideoQuery(videoId) || {};
-
-
-
-//  useEffect(() => {
-//     dispatch(fetchVideo(videoId));
-//  },[dispatch, videoId]);
 
 
 //  const { _id, link, title, tags } = video || {};
@@ -57,9 +53,15 @@ const { _id, videoUrl, title  } = video || {};
 
                     <VideoDescription video={video}/>
 
+                    <AddCommentForm id={_id}/>
+
+                    <CommentLists id={_id} />
+
                 </div>
 
                 {/* <RelatedVideoList currentVideoId={id} tags={tags} /> */}
+
+               
                     
         </div>
     }
@@ -80,4 +82,4 @@ const { _id, videoUrl, title  } = video || {};
   )
 }
 
-export default Video
+export default VideoDetailPage

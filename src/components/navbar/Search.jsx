@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useMatch, useNavigate } from 'react-router-dom';
+import { search } from '../../features/videos/videoSlice';
 
 const Search = () => {
   const dispatch = useDispatch();
-//   const { search } = useSelector(state => state.filter);
-//   const [input, setInput] = useState(search);
-  const [input, setInput] = useState("");
+  //const { search } = useSelector(state => state.filter);
+  //const [input, setInput] = useState(search);
+  const [input, setInput] = useState('');
 
   const match = useMatch("/");
   const navigate = useNavigate();
@@ -17,15 +18,15 @@ const Search = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(searched(input));
-
+    dispatch(search(input));
   // if use not in  home page redirect to home page
 
     if(!match) {
         navigate("/");
     }
-    setInput("");
   }
+
+  
 
   return (
     <form onSubmit={handleSubmit}>

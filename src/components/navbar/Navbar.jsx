@@ -3,8 +3,19 @@ import Search from './Search';
 import logoImage from '../../assets/lws.svg';
 import searchImage from '../../assets/search.svg';
 import { Link } from 'react-router-dom';
+import { clearSearch } from '../../features/videos/videoSlice';
+import { useDispatch } from 'react-redux';
+
+
 
 const Navbar = () => {
+
+    const dispatch = useDispatch();
+
+    const handleClear = () => {
+        dispatch(clearSearch())
+    }
+
   return (
     <nav className="bg-slate-100 shadow-md">
         <div
@@ -24,11 +35,15 @@ const Navbar = () => {
                
                 <Search />
 
+               
+
                 <img
                     className="inline h-4 cursor-pointer"
                     src={searchImage}
                     alt="Search"
                 />
+
+                <span className='ml-3 pl-2' onClick={handleClear}>Clear</span>
             </div>
         </div>
     </nav>

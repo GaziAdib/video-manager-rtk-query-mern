@@ -36,16 +36,25 @@ export const videosApi = rootApi.injectEndpoints({
             }),
         }),
 
-          // update Video like count
-          increaseLikeCount: builder.mutation({
+        // update Video like count
+        increaseLikeCount: builder.mutation({
             query: ({videoId, likeCount}) => ({
                 url: `/videos/${videoId}`,
                 method: 'PATCH',
                 body: likeCount
             }),
+        }),
+
+        // search by title
+        searchByTitle: builder.query({
+            query: (title) => `videos/search/${title}`
         })
     })
 })
 
 
-export const { useFetchVideosQuery, useFetchSingleVideoQuery, useAddVideosMutation, useDeleteVideoMutation, useUpdateVideoMutation, useIncreaseLikeCountMutation } = videosApi
+
+
+
+
+export const { useFetchVideosQuery, useFetchSingleVideoQuery, useAddVideosMutation, useDeleteVideoMutation, useUpdateVideoMutation, useIncreaseLikeCountMutation, useSearchByTitleQuery } = videosApi

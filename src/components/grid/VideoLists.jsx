@@ -1,29 +1,20 @@
 import React from 'react'
 //import VideoGridItem from './VideoGridItem'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux'
 //import { fetchVideos } from '../../features/videos/videosSlice';
 import Loading from '../ui/Loading';
-import { useFetchVideosQuery } from '../../features/videos/videosApi';
+import { useFetchVideosQuery, useSearchByTitleQuery } from '../../features/videos/videosApi';
 import VideoCard from './VideoCard';
 
 const VideoLists = () => {
 
     const {data: videos, isLoading, isError, error} = useFetchVideosQuery() || {};
 
-//  const dispatch = useDispatch();
+    const { search } = useSelector((state) => state.videos);
 
-//  const { videos, isLoading, isError, error, currentPage } = useSelector(state => state.videos);
- 
- // get data from filter slice
+    const {data: searchedVideoResults} = useSearchByTitleQuery(search)
 
-//  const { tags, search } = useSelector(state => state.filter);
-
-    // useEffect(() => {
-
-    //     dispatch(fetchVideos({tags, search, currentPage}));
-
-    // },[dispatch, tags, search, currentPage]);
+    // console.log(videos);
 
     let content;
 
@@ -36,9 +27,15 @@ const VideoLists = () => {
     }
 
     if(!isError && !isLoading && videos?.length > 0) {
-        content = videos.map((video) => (
-            <VideoCard key={video._id} video={video} />
-        ));
+
+        content = search == '' ? (
+            videos?.map((video) => {
+                return <VideoCard key={video._id} video={video} />
+            })
+        ) :  (searchedVideoResults?.map((video) => {
+            return <VideoCard key={video._id} video={video} />
+        }))
+           
     }
 
     

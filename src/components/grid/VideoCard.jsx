@@ -3,18 +3,33 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 //import { getVideosByAuthor } from '../../features/videos/videosSlice';
 import LogoAvatar from '../../assets/lws.svg';
+import { useAddWishlistMutation } from '../../features/wishlists/wishlistsApi';
 
 const VideoCard = ({ video = {} }) => {
 
     const { _id, thumbnailUrl, title, likeCount, category, author, createdAt } = video;
 
-    // filter by author
+    const [addWishlist] = useAddWishlistMutation() || {};
 
-    // const dispatch = useDispatch();
 
-    // const filterByAuthorHandler = (name) => {
-    //     dispatch(getVideosByAuthor(name));
-    // }
+    const addToWishlist = (videoData) => {
+        console.log('added to wishlist');
+        if(videoData._id === _id) {
+            addWishlist({
+                video_id: videoData._id, 
+                author: videoData.author,
+                title: videoData.title,
+                category: videoData.category,
+                thumbnailUrl: videoData.thumbnailUrl
+            })
+        } else {
+            alert('you cannot add multiple time same things')
+        }
+        
+       
+    }
+
+   
 
   return (
     <div
@@ -67,6 +82,10 @@ const VideoCard = ({ video = {} }) => {
                 <p className="text-gray-400 text-xs mt-1">
                     {likeCount} likes .  {createdAt}
                 </p>
+
+                <button onClick={() => addToWishlist(video)} className="text-green-600 font-bold rounded-lg text-xs mt-1">
+                    Add Wishlist
+                </button>
               
                 {/* <button style={{ float: 'right'}} className="text-white rounded px-1 py-1 bg-red-600 mx-1 text-xs mt-1">
                     Delete
