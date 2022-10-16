@@ -32,7 +32,7 @@ const AddCommentForm = ({ id }) => {
     return (
         <>
             <form onSubmit={addCommentHandler}>
-                <label htmlFor="content">Content</label>
+                <label htmlFor="content">Add comment</label>
                 <div>
                     <input onBlur={() => content === '' && setIsFocus(false)} onFocus={() => setIsFocus(true)} type="text" required value={content} onChange={(e) => setContent(e.target.value)} placeholder="enter comment..." />
                 </div>
