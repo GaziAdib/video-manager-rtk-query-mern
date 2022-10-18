@@ -14,72 +14,72 @@ import { useFetchSingleVideoQuery } from '../features/videos/videosApi';
 
 const VideoDetailPage = () => {
 
-// const {video, isLoading, isError, error} = useSelector(state => state.video)
+    // const {video, isLoading, isError, error} = useSelector(state => state.video)
 
-//  const dispatch = useDispatch();
+    //  const dispatch = useDispatch();
 
- const { videoId } = useParams();
+    const { videoId } = useParams();
 
- console.log(typeof(videoId));
-
-
- const {data: video, isError, isLoading, error} = useFetchSingleVideoQuery(videoId) || {};
+    console.log(typeof (videoId));
 
 
-//  const { _id, link, title, tags } = video || {};
+    const { data: video, isError, isLoading, error } = useFetchSingleVideoQuery(videoId) || {};
 
 
-const { _id, videoUrl, title  } = video || {};
+    //  const { _id, link, title, tags } = video || {};
 
- // decide what to render
 
- let content = null;
+    const { _id, videoUrl, title, authorId } = video || {};
 
- if(isLoading) content = <Loading />;
+    // decide what to render
 
- if(!isLoading && isError) content = <div className="col-span-12">{error}</div>
+    let content = null;
 
-    if(!isError && !isLoading && !video?._id) {
-        content =  <div className="col-span-12">No Video Found!</div>;
+    if (isLoading) content = <Loading />;
+
+    if (!isLoading && isError) content = <div className="col-span-12">{error}</div>
+
+    if (!isError && !isLoading && !video?._id) {
+        content = <div className="col-span-12">No Video Found!</div>;
     }
 
 
-    if(!isLoading && !isError && video?._id) {
+    if (!isLoading && !isError && video?._id) {
 
-      content =  <div className="grid grid-cols-3 gap-2 lg:gap-8">
-                <div className="col-span-full w-full space-y-8 lg:col-span-2">
-                      
-                    <VideoPlayer videoUrl={videoUrl} title={title} />
+        content = <div className="grid grid-cols-3 gap-2 lg:gap-8">
+            <div className="col-span-full w-full space-y-8 lg:col-span-2">
 
-                    <VideoDescription video={video}/>
+                <VideoPlayer videoUrl={videoUrl} title={title} />
 
-                    <AddCommentForm id={_id}/>
+                <VideoDescription video={video} />
 
-                    <CommentLists id={_id} />
+                <AddCommentForm authorId={authorId} id={_id} />
 
-                </div>
+                <CommentLists id={_id} />
 
-                {/* <RelatedVideoList currentVideoId={id} tags={tags} /> */}
+            </div>
 
-               
-                    
+            {/* <RelatedVideoList currentVideoId={id} tags={tags} /> */}
+
+
+
         </div>
     }
 
 
-  return (
-    
+    return (
+
         <section className="pt-6 pb-20">
             <div className="mx-auto max-w-7xl px-2 pb-20 min-h-[400px]">
-                
+
 
                 {content}
 
             </div>
         </section>
 
-    
-  )
+
+    )
 }
 
 export default VideoDetailPage

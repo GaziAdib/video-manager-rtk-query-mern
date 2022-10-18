@@ -4,7 +4,7 @@ export const wishlistsApi = rootApi.injectEndpoints({
     endpoints: (builder) => ({
         // fetch all wish
         fetchWishlists: builder.query({
-            query: () => '/videos/wishlists/all',
+            query: (id) => `/videos/wishlists/${id}/all`,
         }),
 
         // create wish
@@ -30,4 +30,4 @@ export const wishlistsApi = rootApi.injectEndpoints({
 
 
 
-export const { useFetchWishlistsQuery, useAddWishlistMutation, useDeleteWishlistMutation  } = wishlistsApi
+export const { useFetchWishlistsQuery, useAddWishlistMutation, useDeleteWishlistMutation } = wishlistsApi

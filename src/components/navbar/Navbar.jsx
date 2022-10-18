@@ -16,39 +16,46 @@ const Navbar = () => {
         dispatch(clearSearch())
     }
 
-  return (
-    <nav className="bg-slate-100 shadow-md">
-        <div
-            className="max-w-7xl mx-auto px-5 lg:px-0 flex justify-between py-3"
-        >
-            <Link to='/'>
-                <img
-                    className="h-10"
-                    src={logoImage}
-                    alt="Gazi Adib"
-                />
-            </Link>
+    return (
+        <nav className="bg-slate-100 shadow-md">
             <div
-                className="border border-slate-200 flex items-center bg-white h-10 px-5 rounded-lg text-sm ring-emerald-200"
+                className="max-w-7xl mx-auto px-5 lg:px-0 flex justify-between py-3"
             >
-               
-               
-                <Search />
+                <Link to='/'>
+                    <img
+                        className="h-10"
+                        src={logoImage}
+                        alt="Gazi Adib"
+                    />
+                </Link>
+                <Link to='/addVideo'>
+                    <img
+                        className="h-10"
+                        src={logoImage}
+                        alt="Gazi Adib"
+                    />
+                </Link>
+                <div
+                    className="border border-slate-200 flex items-center bg-white h-10 px-5 rounded-lg text-sm ring-emerald-200"
+                >
 
-               
 
-                <img
-                    className="inline h-4 cursor-pointer"
-                    src={searchImage}
-                    alt="Search"
-                />
+                    <Search />
 
-                <span className='ml-3 pl-2' onClick={handleClear}>Clear</span>
+
+
+                    <img
+                        className="inline h-4 cursor-pointer"
+                        src={searchImage}
+                        alt="Search"
+                    />
+
+                    <span className='ml-3 pl-2' onClick={handleClear}>Clear</span>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-  )
+    )
 }
 
 export default Navbar

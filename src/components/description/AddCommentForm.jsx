@@ -2,9 +2,13 @@ import React from 'react'
 import { useState } from 'react';
 import { useAddCommentMutation } from '../../features/comments/commentsApi';
 
-const AddCommentForm = ({ id }) => {
+const AddCommentForm = ({ id, authorId }) => {
 
     console.log(id);
+
+    const authUser = localStorage.getItem('auth');
+
+    const mainUser = JSON.parse(authUser);
 
     const [addComment] = useAddCommentMutation() || {};
 
@@ -21,7 +25,7 @@ const AddCommentForm = ({ id }) => {
             data: {
                 video_id: id,
                 content: content,
-                author: 'Adib'
+                authorName: mainUser?.user?.username
             }
         })
         setContent('');

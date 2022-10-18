@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
 import { useAddVideosMutation } from '../features/videos/videosApi';
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+
 
 const AddVideo = () => {
 
-  const [addVideo, { isSuccess }] = useAddVideosMutation();
+
+  const { user } = useSelector((state) => state?.auth) || {};
+
+  const authUser = localStorage.getItem('auth');
+
+  const mainUser = JSON.parse(authUser);
+
+
+  const [addVideo] = useAddVideosMutation();
+
+  // get author for posting video
+
+
+  console.log(mainUser?.user?.username);
+
+
 
   // notification
   const [showNotification, setShowNotification] = useState('')
@@ -22,37 +41,44 @@ const AddVideo = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    addVideo({
-      title,
-      category,
-      description,
-      thumbnailUrl,
-      videoUrl,
-      likeCount: 0,
-      unlikeCount: 0
-    })
+    if (mainUser?.user) {
+      addVideo({
+        authorId: mainUser?.user?._id,
+        title,
+        category,
+        description,
+        thumbnailUrl,
+        videoUrl,
+        likeCount: 0,
+        unlikeCount: 0
+      })
+    } else {
+      console.log('no user')
+    }
+
+
+
+
 
 
     // send notification that new video added
 
-    const sendNotification = () => {
-      Notification.requestPermission().then(n => {
-        if (n === 'granted') {
-          const notification = new Notification(`Video with title ${title} Added Successfully`, {
-            body: "Awesome Video Added By Adib Author",
-            data: { videoTitle: `Video with title: ${title} Added Successfully` }
-          })
+    // const sendNotification = () => {
+    //   Notification.requestPermission().then(n => {
+    //     if (n === 'granted') {
+    //       const notification = new Notification(`Video with title ${title} Added Successfully`, {
+    //         body: "Awesome Video Added By Adib Author",
+    //         data: { videoTitle: `Video with title: ${title} Added Successfully` }
+    //       })
 
-          // console.log(notification.data)
+    //       // console.log(notification.data)
 
-          setShowNotification(notification.data.videoTitle)
-        }
-      })
-    }
+    //       setShowNotification(notification.data.videoTitle)
+    //     }
+    //   })
+    // }
 
-    sendNotification()
-
-
+    // sendNotification()
 
     navigate('/')
 

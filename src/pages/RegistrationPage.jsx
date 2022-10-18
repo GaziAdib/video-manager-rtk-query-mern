@@ -8,8 +8,8 @@ import Error from '../components/ui/Error';
 
 const RegistrationPage = () => {
 
-    const [avatar, setAvatar] = useState('');
-    const [name, setName] = useState('');
+    const [profileImage, setProfileImage] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -50,8 +50,8 @@ const RegistrationPage = () => {
                 setError('This User Email Already Exist');
             } else {
                 register({
-                    avatar,
-                    name,
+                    profileImage,
+                    username,
                     email,
                     password
                 });
@@ -90,8 +90,8 @@ const RegistrationPage = () => {
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
                                     placeholder="Avatar URL"
-                                    value={avatar}
-                                    onChange={(e) => setAvatar(e.target.value)}
+                                    value={profileImage}
+                                    onChange={(e) => setProfileImage(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -106,8 +106,8 @@ const RegistrationPage = () => {
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
                                     placeholder="Name"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
 

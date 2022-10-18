@@ -7,7 +7,7 @@ export const authAPI = rootApi.injectEndpoints({
         // register process 
         register: builder.mutation({
             query: (data) => ({
-                url: '/register',
+                url: '/users/register',
                 method: 'POST',
                 body: data,
             }),
@@ -17,18 +17,21 @@ export const authAPI = rootApi.injectEndpoints({
 
                     const result = await queryFulfilled;
 
+
+                    console.log('register', result);
+
                     // when fulfilled set data to localstorage
 
                     localStorage.setItem('auth', JSON.stringify({
-                        accessToken: result.data.accessToken,
-                        user: result.data.user,
+                        //accessToken: result.data.accessToken,
+                        user: result?.data?.user
                     }));
 
                     // dispatch those data to redux store
 
                     dispatch(userLoggedIn({
-                        accessToken: result.data.accessToken,
-                        user: result.data.user,
+                        //accessToken: result.data.accessToken,
+                        user: result?.data?.user
                     }));
 
                 } catch (err) {
@@ -40,7 +43,7 @@ export const authAPI = rootApi.injectEndpoints({
         // login process
         login: builder.mutation({
             query: (data) => ({
-                url: '/login',
+                url: '/users/login',
                 method: 'POST',
                 body: data,
             }),
@@ -50,18 +53,19 @@ export const authAPI = rootApi.injectEndpoints({
 
                     const result = await queryFulfilled;
 
+
                     // when fulfilled set data to localstorage
 
                     localStorage.setItem('auth', JSON.stringify({
-                        accessToken: result.data.accessToken,
-                        user: result.data.user,
+                        //accessToken: result.data.accessToken,
+                        user: result?.data?.user
                     }));
 
                     // dispatch those data to redux store
 
                     dispatch(userLoggedIn({
-                        accessToken: result.data.accessToken,
-                        user: result.data.user,
+                        //accessToken: result.data.accessToken,
+                        user: result?.data?.user
                     }));
 
                 } catch (err) {
