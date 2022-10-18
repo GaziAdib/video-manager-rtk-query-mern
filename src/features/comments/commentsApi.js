@@ -5,17 +5,25 @@ export const commentsApi = rootApi.injectEndpoints({
         // fetch all comments for each video id
         fetchComments: builder.query({
             query: (id) => `/videos/${id}/comments`,
-            providesTags:['Comment']
+            providesTags: ['Comment']
         }),
 
         // create add comment
         addComment: builder.mutation({
-            query: ({id, data}) => ({
+            query: ({ id, data }) => ({
                 url: `/videos/${id}/addcomments`,
                 method: 'POST',
                 body: data
             }),
-            invalidatesTags:['Comment']
+            invalidatesTags: ['Comment']
+        }),
+        // create add comment
+        deleteComment: builder.mutation({
+            query: (id) => ({
+                url: `/videos/${id}/comment/delete`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Comment']
         })
     })
 })
@@ -25,4 +33,4 @@ export const commentsApi = rootApi.injectEndpoints({
 
 
 
-export const { useFetchCommentsQuery, useAddCommentMutation } = commentsApi
+export const { useFetchCommentsQuery, useAddCommentMutation, useDeleteCommentMutation } = commentsApi
