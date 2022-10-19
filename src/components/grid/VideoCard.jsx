@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 //import { getVideosByAuthor } from '../../features/videos/videosSlice';
 import LogoAvatar from '../../assets/lws.svg';
 import { useAddWishlistMutation } from '../../features/wishlists/wishlistsApi';
+import moment from 'moment';
+
 
 const VideoCard = ({ video = {} }) => {
 
-    const { _id, thumbnailUrl, title, likeCount, category, author, createdAt } = video;
+    const { _id, thumbnailUrl, title, likeCount, category, author, viewsCount, createdAt } = video;
 
     const authUser = localStorage.getItem('auth');
 
@@ -86,7 +88,7 @@ const VideoCard = ({ video = {} }) => {
 
                         </Link>
                         <p className="text-gray-400 text-xs mt-1">
-                            {likeCount} likes .  {createdAt}
+                            {likeCount} likes . {viewsCount} views  {moment(createdAt).format('YYYY-MM-DD')}
                         </p>
 
                         <button onClick={() => addToWishlist(video)} className="text-green-600 font-bold rounded-lg text-xs mt-1">
