@@ -2,27 +2,13 @@ import React, { useState } from 'react';
 import { useAddVideosMutation } from '../features/videos/videosApi';
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-
-
 
 const AddVideo = () => {
 
-
-  const { user } = useSelector((state) => state?.auth) || {};
-
-  const authUser = localStorage.getItem('auth');
-
-  const mainUser = JSON.parse(authUser);
-
+  const { user } = useSelector((state) => state.auth) || {};
+  console.log(user);
 
   const [addVideo] = useAddVideosMutation();
-
-  // get author for posting video
-
-
-  console.log(mainUser?.user?.username);
-
 
 
   // notification
@@ -41,9 +27,9 @@ const AddVideo = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (mainUser?.user) {
+    if (user) {
       addVideo({
-        authorId: mainUser?.user?._id,
+        authorId: user?._id,
         title,
         category,
         description,
@@ -53,7 +39,7 @@ const AddVideo = () => {
         unlikeCount: 0
       })
     } else {
-      console.log('no user')
+      console.log('no user logged in')
     }
 
 

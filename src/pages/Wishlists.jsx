@@ -1,14 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useDeleteWishlistMutation, useFetchWishlistsQuery } from '../features/wishlists/wishlistsApi'
 
 const Wishlists = () => {
 
-  const authUser = localStorage.getItem('auth');
+  const { user } = useSelector((state) => state.auth) || {};
 
-  const mainUser = JSON.parse(authUser);
-
-  const userId = mainUser?.user?._id
+  const userId = user?._id
 
   const { data: mywishlists, isError, isLoading, error } = useFetchWishlistsQuery(userId);
 
@@ -18,7 +17,6 @@ const Wishlists = () => {
   // delete wishlist item
 
   const handleDelete = (id) => {
-    console.log('delete')
     deleteWishlist(id);
   }
 

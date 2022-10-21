@@ -14,20 +14,10 @@ import { useFetchSingleVideoQuery } from '../features/videos/videosApi';
 
 const VideoDetailPage = () => {
 
-    // const {video, isLoading, isError, error} = useSelector(state => state.video)
-
-    //  const dispatch = useDispatch();
-
     const { videoId } = useParams();
-
-    console.log(typeof (videoId));
 
 
     const { data: video, isError, isLoading, error } = useFetchSingleVideoQuery(videoId) || {};
-
-
-    //  const { _id, link, title, tags } = video || {};
-
 
     const { _id, videoUrl, title, authorId } = video || {};
 

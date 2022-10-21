@@ -4,7 +4,16 @@ export const rootApi = createApi({
     reducerPath: 'api',
     tagTypes: [],
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:5000/api'
+        baseUrl: 'http://localhost:5000/api',
+        prepareHeaders: async (headers, { getState, endpoint }) => {
+            const token = getState()?.auth?.accessToken;
+
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`);
+            }
+            return headers;
+
+        }
     }),
     endpoints: (builder) => ({}),
 });

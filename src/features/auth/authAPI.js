@@ -17,20 +17,17 @@ export const authAPI = rootApi.injectEndpoints({
 
                     const result = await queryFulfilled;
 
-
-                    console.log('register', result);
-
                     // when fulfilled set data to localstorage
 
                     localStorage.setItem('auth', JSON.stringify({
-                        //accessToken: result.data.accessToken,
+                        accessToken: result?.data?.accessToken,
                         user: result?.data?.user
                     }));
 
                     // dispatch those data to redux store
 
                     dispatch(userLoggedIn({
-                        //accessToken: result.data.accessToken,
+                        accessToken: result?.data?.accessToken,
                         user: result?.data?.user
                     }));
 
@@ -57,14 +54,14 @@ export const authAPI = rootApi.injectEndpoints({
                     // when fulfilled set data to localstorage
 
                     localStorage.setItem('auth', JSON.stringify({
-                        //accessToken: result.data.accessToken,
+                        accessToken: result?.data?.accessToken,
                         user: result?.data?.user
                     }));
 
                     // dispatch those data to redux store
 
                     dispatch(userLoggedIn({
-                        //accessToken: result.data.accessToken,
+                        accessToken: result?.data?.accessToken,
                         user: result?.data?.user
                     }));
 

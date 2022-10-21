@@ -6,7 +6,7 @@ import moment from 'moment';
 
 const VideoDescription = ({ video }) => {
 
-    const { title, createdAt, description, likeCount, unlikeCount, viewsCount, _id } = video || {};
+    const { title, createdAt, description, likeCount, unlikeCount, viewsCount, _id, likes, authorId } = video || {};
 
     const [deleteVideo] = useDeleteVideoMutation() || {};
 
@@ -46,7 +46,7 @@ const VideoDescription = ({ video }) => {
                 </h2>
 
 
-                <LikeUnlike _id={_id} likeCount={likeCount} unlikeCount={unlikeCount} />
+                <LikeUnlike authorId={authorId} likes={likes} likeCount={likeCount} unlikeCount={unlikeCount} />
 
 
             </div>

@@ -1,14 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useAddCommentMutation } from '../../features/comments/commentsApi';
 
-const AddCommentForm = ({ id, authorId }) => {
+const AddCommentForm = ({ id }) => {
 
-    console.log(id);
-
-    const authUser = localStorage.getItem('auth');
-
-    const mainUser = JSON.parse(authUser);
+    const { user } = useSelector((state) => state.auth) || {};
 
     const [addComment] = useAddCommentMutation() || {};
 
@@ -16,16 +13,20 @@ const AddCommentForm = ({ id, authorId }) => {
 
     const [isFocus, setIsFocus] = useState(false);
 
+    const localUser = localStorage.getItem('auth');
+
+    const localFinalUser = JSON.parse(localUser);
+
 
     const addCommentHandler = (e) => {
         e.preventDefault();
-        console.log('comment added');
+
         addComment({
             id: id,
             data: {
+                authorName: user?.username,
                 video_id: id,
-                content: content,
-                authorName: mainUser?.user?.username
+                content: content
             }
         })
         setContent('');

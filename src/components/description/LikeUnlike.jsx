@@ -1,68 +1,67 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
-
 import likeImage from '../../assets/like.svg';
 import unlikeImage from '../../assets/unlike.svg'
-import { useIncreaseLikeCountMutation } from '../../features/videos/videosApi';
-// import { updateVideoLikeCount, updateVideoUnLikeCount } from '../../features/video/videoSlice'
+import { useLikeVideoByAuthorMutation } from '../../features/videos/videosApi';
 
 
-const LikeUnlike = ({ likeCount, unlikeCount }) => {
+
+const LikeUnlike = ({ likeCount, unlikeCount, authorId, likes }) => {
+
+    console.log(authorId);
 
     const { videoId } = useParams();
 
-    const [increaseLikeCount] = useIncreaseLikeCountMutation() || {};
+    const [likeVideoByAuthor] = useLikeVideoByAuthorMutation(videoId) || {};
 
-    // var dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth) || {};
 
-    const likeIncreaseHandler = () => {
+    const likeVideoHandler = (id) => {
+        console.log('like')
 
-        increaseLikeCount({videoId: videoId, likeCount: likeCount + 1})
+        likeVideoByAuthor({
+            videoId: id,
+            authorId: user?._id
+        });
 
-        //dispatch(updateVideoLikeCount({id: videoId, likes: likes + 1}))
-    
     }
 
-    // const UnlikeIncreaseHandler = () => {
-    //     dispatch(updateVideoUnLikeCount({id: videoId, unlikes: unlikes + 1}))
-    // }
+    return (
+        <div className="flex gap-10 w-48">
+            <div className="flex gap-1">
+                <div className="shrink-0">
+                    <img
+                        onClick={() => likeVideoHandler(videoId)}
+                        className="w-5 block"
+                        src={likeImage}
+                        alt="Like"
+                    />
+                </div>
+                <div
+                    className="text-sm leading-[1.7142857] text-slate-600"
+                >
+                    {likeCount}K
+                </div>
+            </div>
+            <div className="flex gap-1">
+                <div className="shrink-0">
+                    <img
+                        // onClick={UnlikeIncreaseHandler}
+                        className="w-5 block"
+                        src={unlikeImage}
+                        alt="Unlike"
+                    />
+                </div>
+                <div
+                    className="text-sm leading-[1.7142857] text-slate-600"
+                >
+                    {unlikeCount}K
+                </div>
+            </div>
+        </div>
 
-
-  return (
-    <div className="flex gap-10 w-48">
-    <div className="flex gap-1">
-        <div className="shrink-0">
-            <img
-                onClick={likeIncreaseHandler}
-                className="w-5 block"
-                src={likeImage}
-                alt="Like"
-            />
-        </div>
-        <div
-            className="text-sm leading-[1.7142857] text-slate-600"
-        >
-            {likeCount}K
-        </div>
-    </div>
-    <div className="flex gap-1">
-        <div className="shrink-0">
-            <img
-                // onClick={UnlikeIncreaseHandler}
-                className="w-5 block"
-                src={unlikeImage}
-                alt="Unlike"
-            />
-        </div>
-        <div
-            className="text-sm leading-[1.7142857] text-slate-600"
-        >
-            {unlikeCount}K
-        </div>
-    </div>
-</div>
-
-  )
+    )
 }
 
 export default LikeUnlike
