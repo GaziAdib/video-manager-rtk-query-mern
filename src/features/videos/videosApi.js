@@ -47,6 +47,17 @@ export const videosApi = rootApi.injectEndpoints({
             }),
         }),
 
+        // update Video unlike By Users
+        unlikeVideoByAuthor: builder.mutation({
+            query: ({ videoId, authorId }) => ({
+                url: `/videos/${videoId}/unlikes`,
+                method: 'PATCH',
+                body: {
+                    likes: authorId
+                }
+            }),
+        }),
+
         // search by title
         searchByTitle: builder.query({
             query: (title) => `videos/search/${title}`
@@ -59,4 +70,4 @@ export const videosApi = rootApi.injectEndpoints({
 
 
 
-export const { useFetchVideosQuery, useFetchSingleVideoQuery, useAddVideosMutation, useDeleteVideoMutation, useUpdateVideoMutation, useLikeVideoByAuthorMutation, useSearchByTitleQuery } = videosApi
+export const { useFetchVideosQuery, useFetchSingleVideoQuery, useAddVideosMutation, useDeleteVideoMutation, useUpdateVideoMutation, useLikeVideoByAuthorMutation, useUnlikeVideoByAuthorMutation, useSearchByTitleQuery } = videosApi
