@@ -6,6 +6,7 @@ import AddCommentForm from '../components/description/AddCommentForm';
 import CommentLists from '../components/description/CommentLists';
 import VideoPlayer from '../components/description/Player'
 import VideoDescription from '../components/description/VideoDescription'
+import RelatedVideos from '../components/relatedVideos/RelatedVideos';
 //import RelatedVideoList from '../components/list/RelatedVideoList'
 //import { fetchVideo } from '../features/video/videoSlice'
 import Loading from '../components/ui/Loading';
@@ -19,7 +20,7 @@ const VideoDetailPage = () => {
 
     const { data: video, isError, isLoading, error } = useFetchSingleVideoQuery(videoId) || {};
 
-    const { _id, videoUrl, title, authorId } = video || {};
+    const { _id, videoUrl, category, title, authorId } = video || {};
 
     // decide what to render
 
@@ -49,6 +50,7 @@ const VideoDetailPage = () => {
 
             </div>
 
+            <RelatedVideos currentVideoId={_id} category={category} />
             {/* <RelatedVideoList currentVideoId={id} tags={tags} /> */}
 
 

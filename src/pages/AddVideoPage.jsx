@@ -5,8 +5,11 @@ import { useSelector } from 'react-redux';
 
 const AddVideo = () => {
 
-  const { user } = useSelector((state) => state.auth) || {};
-  console.log(user);
+  // const { user } = useSelector((state) => state.auth) || {};
+  // console.log(user);
+
+  const localuser = localStorage.getItem('auth');
+  const mainUser = JSON.parse(localuser);
 
   const [addVideo] = useAddVideosMutation();
 
@@ -27,9 +30,9 @@ const AddVideo = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (user) {
+    if (mainUser?.user) {
       addVideo({
-        authorId: user?._id,
+        authorId: mainUser?.user?._id,
         title,
         category,
         description,

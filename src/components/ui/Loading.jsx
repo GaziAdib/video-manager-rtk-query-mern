@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loading = () => {
   return (
-    <div className="col-span-12">some error happened</div>
+    <div className="col-span-12">Loading Content</div>
   )
 }
 
