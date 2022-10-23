@@ -2,9 +2,15 @@ import { rootApi } from "../api/rootApi"
 
 export const wishlistsApi = rootApi.injectEndpoints({
     endpoints: (builder) => ({
-        // fetch all wish
+        // fetch user based wish
         fetchWishlists: builder.query({
             query: (id) => `/videos/wishlists/${id}/all`,
+            providesTags: ['Wishlist']
+        }),
+
+        fetchAllWishlists: builder.query({
+            query: () => `/videos/wishlists/allWishlists`,
+            providesTags: ['Wishlist']
         }),
 
         // create wish
@@ -14,6 +20,7 @@ export const wishlistsApi = rootApi.injectEndpoints({
                 method: 'POST',
                 body: data
             }),
+            invalidatesTags: ['Wishlist']
         }),
         // delete wishlist
         deleteWishlist: builder.mutation({
@@ -21,6 +28,7 @@ export const wishlistsApi = rootApi.injectEndpoints({
                 url: `/videos/wishlists/${id}`,
                 method: 'DELETE'
             }),
+            invalidatesTags: ['Wishlist']
         })
     })
 })
@@ -30,4 +38,4 @@ export const wishlistsApi = rootApi.injectEndpoints({
 
 
 
-export const { useFetchWishlistsQuery, useAddWishlistMutation, useDeleteWishlistMutation } = wishlistsApi
+export const { useFetchWishlistsQuery, useFetchAllWishlistsQuery, useAddWishlistMutation, useDeleteWishlistMutation } = wishlistsApi

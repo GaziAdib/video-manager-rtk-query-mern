@@ -8,6 +8,8 @@ import Navbar from './components/navbar/Navbar';
 import Wishlists from './pages/Wishlists';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
+import PublicRoute from './components/routes/PublicRoute';
+import PrivateRoute from './components/routes/PrivateRoute';
 
 
 function App() {
@@ -15,12 +17,12 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/register' element={<RegistrationPage />} />
+        <Route path='/login' element={<PublicRoute><LoginPage /></PublicRoute>} />
+        <Route path='/register' element={<PublicRoute><RegistrationPage /></PublicRoute>} />
         <Route path='/' element={<HomePage />} />
-        <Route path='/my-wishlist' element={<Wishlists />} />
+        <Route path='/my-wishlist' element={<PrivateRoute><Wishlists /></PrivateRoute>} />
         <Route path='/videos/:videoId' element={<VideoDetailPage />} />
-        <Route path='/addVideo' element={<AddVideo />} />
+        <Route path='/addVideo' element={<PrivateRoute><AddVideo /></PrivateRoute>} />
       </Routes>
       <Footer />
     </Router>

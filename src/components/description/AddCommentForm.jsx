@@ -5,7 +5,7 @@ import { useAddCommentMutation } from '../../features/comments/commentsApi';
 
 const AddCommentForm = ({ id }) => {
 
-    const { user } = useSelector((state) => state.auth) || {};
+    const { user } = useSelector((state) => state?.auth) || {};
 
     const [addComment] = useAddCommentMutation() || {};
 

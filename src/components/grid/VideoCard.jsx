@@ -3,11 +3,13 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 //import { getVideosByAuthor } from '../../features/videos/videosSlice';
 import LogoAvatar from '../../assets/lws.svg';
-import { useAddWishlistMutation } from '../../features/wishlists/wishlistsApi';
+import { useAddWishlistMutation, useFetchAllWishlistsQuery, useFetchWishlistsQuery } from '../../features/wishlists/wishlistsApi';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 
-const VideoCard = ({ video = {} }) => {
+
+const VideoCard = ({ video }) => {
 
     const { _id, thumbnailUrl, title, likeCount, category, author, viewsCount, createdAt } = video;
 
@@ -16,23 +18,62 @@ const VideoCard = ({ video = {} }) => {
     const mainUser = JSON.parse(authUser);
 
 
+    //const { user } = useSelector((state) => state?.auth) || {};
+    const userId = mainUser?.user?._id;
+
+    // const { data: myWishlists, isError, isLoading, error } = useFetchWishlistsQuery(userId) || {};
+
+    const { data: allWishlists, isError, isLoading, error } = useFetchAllWishlistsQuery() || {};
+
+
     const [addWishlist] = useAddWishlistMutation() || {};
 
 
     const addToWishlist = (videoData) => {
+
+
         console.log('added to wishlist');
-        if (videoData.authorId) {
+
+        const allWishLists = allWishlists;
+        console.log('all wishlists', allWishLists);
+
+        // const existedData = allWishlists?.find((item) => item?.video_id === videoData?._id);
+
+        // const sameUser = existedData?.authorName === mainUser?.user?.username
+
+        // console.log(sameUser);
+
+        if (videoData) {
             addWishlist({
                 video_id: videoData?._id,
-                authorId: videoData?.authorId,
+                videoOwnerId: videoData?.authorId,
                 authorName: mainUser?.user?.username,
                 title: videoData?.title,
                 category: videoData?.category,
                 thumbnailUrl: videoData?.thumbnailUrl
             })
-        } else {
-            alert('you cannot add multiple time same things')
         }
+        else {
+            alert('already added to wishlist!')
+        }
+
+        // if (existedData?.authorName !== mainUser?.user?.username) {
+        //     console.log('matched');
+        //     if (!existedData) {
+        //         addWishlist({
+        //             video_id: videoData?._id,
+        //             videoOwnerId: videoData?.authorId,
+        //             authorName: mainUser?.user?.username,
+        //             title: videoData?.title,
+        //             category: videoData?.category,
+        //             thumbnailUrl: videoData?.thumbnailUrl
+        //         })
+        //     } else {
+        //         alert('AuthorName is  matched!')
+        //     }
+        // } else {
+        //     alert('already added to wishlist!')
+        // }
 
 
     }
