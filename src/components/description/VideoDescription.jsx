@@ -19,7 +19,6 @@ const VideoDescription = ({ video }) => {
     const deleteVideoHandler = (e) => {
         deleteVideo(_id);
         navigate('/');
-
     }
 
 

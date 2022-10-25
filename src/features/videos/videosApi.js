@@ -18,6 +18,22 @@ export const videosApi = rootApi.injectEndpoints({
                 method: 'POST',
                 body: data
             }),
+
+            async onQueryStarted(args, { queryFulfilled, dispatch }) {
+                try {
+
+                    const { data: createdVideo } = await queryFulfilled;
+
+                    dispatch(
+                        rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
+                            draft?.push(createdVideo);
+                        })
+                    )
+
+                } catch (error) {
+                    console.log(error);
+                }
+            }
         }),
         // delete Video
         deleteVideo: builder.mutation({
@@ -25,6 +41,27 @@ export const videosApi = rootApi.injectEndpoints({
                 url: `/videos/${id}`,
                 method: 'DELETE'
             }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+
+                    await queryFulfilled;
+
+                    dispatch(
+                        rootApi.util.updateQueryData(
+                            'fetchVideos',
+                            undefined,
+                            (draft) => {
+                                return draft.filter(
+                                    (video) => video?._id !== arg
+                                );
+                            }
+                        )
+                    );
+
+                } catch (error) {
+                    console.log('error in catch block');
+                }
+            }
         }),
 
         // update Video

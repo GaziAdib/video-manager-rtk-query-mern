@@ -33,7 +33,7 @@ const RelatedVideos = ({ currentVideoId, category }) => {
             <h2>RelatedVideos category -{category} | currentId: {currentVideoId}</h2>
 
             {matchedData?.slice(0, 10).filter((data) => data?._id !== currentVideoId).map((item) => {
-                return <RelatedVideoCard relatedVideo={item} currentVideoId={currentVideoId} />
+                return <RelatedVideoCard key={item._id} relatedVideo={item} currentVideoId={currentVideoId} />
             })}
 
 

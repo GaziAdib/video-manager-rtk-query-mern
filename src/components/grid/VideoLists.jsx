@@ -10,7 +10,7 @@ const VideoLists = () => {
 
     const { data: videos, isLoading, isError, error } = useFetchVideosQuery() || {};
 
-    const { search } = useSelector((state) => state.videos);
+    const { search } = useSelector((state) => state?.videos);
 
     const { data: searchedVideoResults } = useSearchByTitleQuery(search)
 
@@ -26,7 +26,7 @@ const VideoLists = () => {
 
     if (!isError && !isLoading && videos?.length > 0) {
 
-        content = search == '' ? (
+        content = search === '' ? (
             videos?.map((video) => {
                 return <VideoCard key={video._id} video={video} />
             })

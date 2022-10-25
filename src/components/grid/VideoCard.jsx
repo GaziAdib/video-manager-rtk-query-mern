@@ -3,9 +3,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 //import { getVideosByAuthor } from '../../features/videos/videosSlice';
 import LogoAvatar from '../../assets/lws.svg';
-import { useAddWishlistMutation, useFetchAllWishlistsQuery, useFetchWishlistsQuery } from '../../features/wishlists/wishlistsApi';
+import { useAddWishlistMutation, useFetchAllWishlistsQuery } from '../../features/wishlists/wishlistsApi';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
+
 
 
 
