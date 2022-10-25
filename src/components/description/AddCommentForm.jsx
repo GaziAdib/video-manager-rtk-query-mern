@@ -24,7 +24,7 @@ const AddCommentForm = ({ id }) => {
         addComment({
             id: id,
             data: {
-                authorName: user?.username,
+                authorName: localFinalUser?.user?.username,
                 video_id: id,
                 content: content
             }

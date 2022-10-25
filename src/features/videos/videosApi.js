@@ -44,7 +44,7 @@ export const videosApi = rootApi.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
 
-                    await queryFulfilled;
+                    const { data: videoData } = await queryFulfilled;
 
                     dispatch(
                         rootApi.util.updateQueryData(

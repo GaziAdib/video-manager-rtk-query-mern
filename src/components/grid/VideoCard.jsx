@@ -7,8 +7,6 @@ import { useAddWishlistMutation, useFetchAllWishlistsQuery } from '../../feature
 import moment from 'moment';
 
 
-
-
 const VideoCard = ({ video }) => {
 
     const { _id, thumbnailUrl, title, likeCount, category, author, viewsCount, createdAt } = video;
@@ -32,8 +30,6 @@ const VideoCard = ({ video }) => {
     const addToWishlist = (videoData) => {
 
 
-        console.log('added to wishlist');
-
         const allWishLists = allWishlists;
         console.log('all wishlists', allWishLists);
 
@@ -56,26 +52,6 @@ const VideoCard = ({ video }) => {
         else {
             alert('already added to wishlist!')
         }
-
-        // if (existedData?.authorName !== mainUser?.user?.username) {
-        //     console.log('matched');
-        //     if (!existedData) {
-        //         addWishlist({
-        //             video_id: videoData?._id,
-        //             videoOwnerId: videoData?.authorId,
-        //             authorName: mainUser?.user?.username,
-        //             title: videoData?.title,
-        //             category: videoData?.category,
-        //             thumbnailUrl: videoData?.thumbnailUrl
-        //         })
-        //     } else {
-        //         alert('AuthorName is  matched!')
-        //     }
-        // } else {
-        //     alert('already added to wishlist!')
-        // }
-
-
     }
 
 
