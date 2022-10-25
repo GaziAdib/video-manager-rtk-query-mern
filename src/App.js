@@ -23,7 +23,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/my-wishlist' element={<PrivateRoute><Wishlists /></PrivateRoute>} />
         <Route path='/videos/:videoId' element={<VideoDetailPage />} />
-        <Route path='/videos/:videoId/update' element={<EditVideoPage />} />
+        <Route path='/videos/:videoId/update' element={<PrivateRoute><EditVideoPage /></PrivateRoute>} />
         <Route path='/addVideo' element={<PrivateRoute><AddVideo /></PrivateRoute>} />
       </Routes>
       <Footer />

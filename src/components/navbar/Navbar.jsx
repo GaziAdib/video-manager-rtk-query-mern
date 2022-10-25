@@ -39,6 +39,9 @@ const Navbar = () => {
                 <Link to='/addVideo'>
                     <span>AddView</span>
                 </Link>
+                <Link to='/my-wishlist'>
+                    <span>Wishlist</span>
+                </Link>
                 <div
                     className="border border-slate-200 flex items-center bg-white h-10 px-5 rounded-lg text-sm ring-emerald-200"
                 >

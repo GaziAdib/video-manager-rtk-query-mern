@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
-import { useDeleteWishlistMutation, useFetchWishlistsQuery } from '../features/wishlists/wishlistsApi'
+import { useDeleteWishlistMutation, useFetchAllWishlistsQuery, useFetchWishlistsQuery } from '../features/wishlists/wishlistsApi'
 
 const Wishlists = () => {
 
@@ -11,12 +11,12 @@ const Wishlists = () => {
 
   const localUser = JSON.parse(mainUser);
 
-  //const userId = user?._id
   const userId = localUser?.user?._id
 
-  const { data: mywishlists, isError, isLoading, error } = useFetchWishlistsQuery(userId);
+  //const { data: mywishlists, isError, isLoading, error } = useFetchWishlistsQuery(userId);
+  const { data: mywishlists, isError, isLoading, error } = useFetchAllWishlistsQuery() || {};
 
-  const [deleteWishlist] = useDeleteWishlistMutation() || {};
+  const [deleteWishlist, { isError: wishlistIsError, isLoading: wishlistIsLoading, error: wishError }] = useDeleteWishlistMutation() || {};
 
 
   // delete wishlist item
