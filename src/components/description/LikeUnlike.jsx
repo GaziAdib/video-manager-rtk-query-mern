@@ -16,6 +16,8 @@ const LikeUnlike = ({ likeCount, unlikeCount, authorId, likes }) => {
     const [unlikeVideoByAuthor] = useUnlikeVideoByAuthorMutation(videoId) || {};
 
     const { user } = useSelector((state) => state.auth) || {};
+    // const localUser = localStorage.getItem('auth');
+    // const mainUser = JSON.parse(localUser)
 
 
     // like video function
@@ -50,7 +52,7 @@ const LikeUnlike = ({ likeCount, unlikeCount, authorId, likes }) => {
                 <div
                     className="text-sm leading-[1.7142857] text-slate-600"
                 >
-                    {likeCount}K
+                    total likes: {likes?.length}
                 </div>
             </div>
             <div className="flex gap-1">

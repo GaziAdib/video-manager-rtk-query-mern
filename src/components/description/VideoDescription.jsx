@@ -1,23 +1,25 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDeleteVideoMutation } from '../../features/videos/videosApi';
 import LikeUnlike from './LikeUnlike';
 import moment from 'moment';
 
 const VideoDescription = ({ video }) => {
 
-    const { title, createdAt, description, likeCount, unlikeCount, viewsCount, _id, likes, authorId } = video || {};
+    const { _id, title, createdAt, description, likeCount, unlikeCount, viewsCount, likes, authorId } = video || {};
 
-    const [deleteVideo] = useDeleteVideoMutation() || {};
+    const [deleteVideo, { data: deleteDone, isSuccess, isError, error }] = useDeleteVideoMutation() || {};
 
     const navigate = useNavigate();
 
+    const localUser = localStorage.getItem('auth');
+    const mainUser = JSON.parse(localUser);
 
 
     // function to delete video
 
-    const deleteVideoHandler = (e) => {
-        deleteVideo(_id);
+    const deleteVideoHandler = (videoId) => {
+        deleteVideo(videoId);
         navigate('/');
     }
 
@@ -56,13 +58,19 @@ const VideoDescription = ({ video }) => {
                 {description}
             </div>
 
-            <button onClick={deleteVideoHandler} style={{ float: 'right' }} className="text-white rounded px-2 py-1 bg-red-600 mx-1 text-xs mt-1">
+            {mainUser?.user?._id === authorId ? (<button onClick={() => deleteVideoHandler(_id)} style={{ float: 'right' }} className="text-white rounded px-2 py-1 bg-red-600 mx-1 text-xs mt-1">
                 Delete
-            </button>
+            </button>) : ('')
+            }
 
-            <button style={{ float: 'right' }} className="text-white rounded px-2 py-1 bg-blue-600 text-xs mx-1 mt-1">
+
+            {mainUser?.user?._id === authorId ? (<Link to={`/videos/${_id}/update`} style={{ float: 'right' }} className="text-white rounded px-2 py-1 bg-blue-600 text-xs mx-1 mt-1">
                 Edit
-            </button>
+            </Link>
+            ) : ('')
+            }
+
+
         </div>
     )
 }

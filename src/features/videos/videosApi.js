@@ -67,10 +67,37 @@ export const videosApi = rootApi.injectEndpoints({
         // update Video
         updateVideo: builder.mutation({
             query: ({ videoId, data }) => ({
-                url: `/videos/${videoId}`,
+                url: `/videos/${videoId}/update`,
                 method: 'PUT',
                 body: data
             }),
+            async onQueryStarted(args, { queryFulfilled, dispatch }) {
+                try {
+
+                    const { data: updatedVideo } = await queryFulfilled;
+                    console.log(updatedVideo);
+                    console.log('args', args);
+
+                    dispatch(
+                        rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
+                            // const video = draft.find((item) => item?._id === args.videoId)
+                            const video = draft?.find((videoItem) => videoItem?._id === args?.videoId);
+                            console.log(JSON.stringify(video));
+                            video._id = args?.videoId;
+                            video.title = args?.data?.title;
+                            video.category = args?.data?.category;
+                            video.description = args?.data?.description;
+                            video.thumbnailUrl = args?.data?.thumbnailUrl;
+                            video.videoUrl = args?.data?.videoUrl
+
+
+                        })
+                    );
+
+                } catch (error) {
+                    console.log(error);
+                }
+            }
         }),
 
         // update Video like By Users

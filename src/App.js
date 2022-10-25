@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import PublicRoute from './components/routes/PublicRoute';
 import PrivateRoute from './components/routes/PrivateRoute';
+import EditVideoPage from './pages/EditVideoPage';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/my-wishlist' element={<PrivateRoute><Wishlists /></PrivateRoute>} />
         <Route path='/videos/:videoId' element={<VideoDetailPage />} />
+        <Route path='/videos/:videoId/update' element={<EditVideoPage />} />
         <Route path='/addVideo' element={<PrivateRoute><AddVideo /></PrivateRoute>} />
       </Routes>
       <Footer />
