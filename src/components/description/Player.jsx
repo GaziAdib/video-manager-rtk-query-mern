@@ -19,7 +19,6 @@ allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
 
   return (
     <iframe
-      id="videoplayerId"
       width="100%"
       className="aspect-video"
       src={`${videoUrl}?autoplay=${autoplay}`}

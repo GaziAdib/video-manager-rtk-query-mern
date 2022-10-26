@@ -13,7 +13,7 @@ const VideoCard = ({ video }) => {
     const [hovered, setHovered] = useState(false);
     /// end test
 
-    const { _id, thumbnailUrl, title, likeCount, category, author, viewsCount, videoUrl, createdAt } = video;
+    const { _id, thumbnailUrl, title, likeCount, likes, category, author, viewsCount, videoUrl, createdAt } = video;
 
     const authUser = localStorage.getItem('auth');
 
@@ -125,10 +125,8 @@ const VideoCard = ({ video }) => {
 
                         </Link>
                         <p className="text-gray-400 text-xs mt-1">
-                            {likeCount} likes . {viewsCount} views  {moment(createdAt).format('YYYY-MM-DD')}
+                            {likes?.length} likes . {viewsCount} views  {moment(createdAt).format('YYYY-MM-DD')}
                         </p>
-
-                        <button>Hover</button>
 
                         <button onClick={() => addToWishlist(video)} disabled={filterDataForDisabled(allWishlists, video, mainUser?.user)} className="text-green-800 bg-green-200 px-1 py-0.5 font-medium rounded-lg text-xs mt-1 disabled:opacity-50">
                             Add Wishlist

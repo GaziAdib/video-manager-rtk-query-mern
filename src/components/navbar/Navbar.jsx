@@ -4,9 +4,10 @@ import logoImage from '../../assets/lws.svg';
 import searchImage from '../../assets/search.svg';
 import { Link } from 'react-router-dom';
 import { clearSearch } from '../../features/videos/videoSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userLoggedOut } from '../../features/auth/authSlice';
 import { useFetchAllWishlistsQuery } from '../../features/wishlists/wishlistsApi';
+import { useEffect } from 'react';
 
 
 const Navbar = () => {
@@ -16,11 +17,13 @@ const Navbar = () => {
     const localUser = localStorage.getItem("auth");
     const mainUser = JSON.parse(localUser);
 
+    //const { user } = useSelector((state) => state?.auth);
+
     const { data: mywishlists, isError, isLoading, error } = useFetchAllWishlistsQuery() || {};
 
-    const lengthWishlist = mywishlists?.filter((item) => item?.authorName === mainUser?.user?.username);
+    const lengthWishlist = mywishlists?.filter((item) => item?.authorName === mainUser?.user?.username).length;
 
-    const wishCounts = lengthWishlist?.length;
+    //const lengthWishlist = mywishlists?.filter((item) => item?.authorName === user?.username).length;
 
 
     // clear search
@@ -46,12 +49,17 @@ const Navbar = () => {
                         alt="Gazi Adib"
                     />
                 </Link>
-                <Link to='/addVideo'>
+
+                {mainUser !== '' && <Link to='/addVideo'>
                     <span>AddView</span>
-                </Link>
-                <Link to='/my-wishlist'>
-                    <span>Wishlist ({wishCounts})</span>
-                </Link>
+                </Link>}
+
+
+
+                {mainUser !== '' && <Link to='/my-wishlist'>
+                    <span>Wishlist ({lengthWishlist})</span>
+                </Link>}
+
                 <div
                     className="border border-slate-200 flex items-center bg-white h-10 px-5 rounded-lg text-sm ring-emerald-200"
                 >
