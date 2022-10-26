@@ -6,12 +6,22 @@ import { Link } from 'react-router-dom';
 import { clearSearch } from '../../features/videos/videoSlice';
 import { useDispatch } from 'react-redux';
 import { userLoggedOut } from '../../features/auth/authSlice';
-
+import { useFetchAllWishlistsQuery } from '../../features/wishlists/wishlistsApi';
 
 
 const Navbar = () => {
 
     const dispatch = useDispatch();
+
+    const localUser = localStorage.getItem("auth");
+    const mainUser = JSON.parse(localUser);
+
+    const { data: mywishlists, isError, isLoading, error } = useFetchAllWishlistsQuery() || {};
+
+    const lengthWishlist = mywishlists?.filter((item) => item?.authorName === mainUser?.user?.username);
+
+    const wishCounts = lengthWishlist?.length;
+
 
     // clear search
     const handleClear = () => {
@@ -40,7 +50,7 @@ const Navbar = () => {
                     <span>AddView</span>
                 </Link>
                 <Link to='/my-wishlist'>
-                    <span>Wishlist</span>
+                    <span>Wishlist ({wishCounts})</span>
                 </Link>
                 <div
                     className="border border-slate-200 flex items-center bg-white h-10 px-5 rounded-lg text-sm ring-emerald-200"
