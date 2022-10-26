@@ -1,16 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from 'react';
 import LogoAvatar from '../../assets/lws.svg';
+import { Link } from 'react-router-dom';
+import { useDeleteWishlistMutation } from '../../features/wishlists/wishlistsApi';
 
+const WishCard = ({ wishlist }) => {
 
-const RelatedVideoCard = ({ relatedVideo }) => {
+    const { _id, authorName, title, category, thumbnailUrl, video_id } = wishlist || {};
 
-    const { _id, title, thumbnailUrl, category, viewsCount, likes } = relatedVideo || {}
+    const [deleteWishlist, { isError, isLoading, error }] = useDeleteWishlistMutation() || {};
 
+    // delete wishlist item
+    const handleDelete = (id) => {
+        deleteWishlist(id);
+    }
 
     return (
         <div
-            className="col-span-12 sm:col-span-6 md:col-span-3"
+            className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]"
         >
             <div className="w-full flex flex-col">
                 <div className="relative">
@@ -30,37 +36,50 @@ const RelatedVideoCard = ({ relatedVideo }) => {
                 </div>
 
                 <div className="flex flex-row mt-2 gap-2">
-                    <Link to={`videos/${_id}`} className="shrink-0">
+                    <a href={`videos/${video_id}`} className="shrink-0">
                         <img
                             src={LogoAvatar}
                             className="rounded-full h-6 w-6"
-                        // alt={author}
+                            alt={authorName}
                         />
-                    </Link>
+                    </a>
 
                     <div clas="flex flex-col">
-                        <Link to={`videos/${_id}`}>
+                        <a href={`videos/${video_id}`}>
                             <p
                                 className="text-slate-900 text-sm font-semibold"
                             >
                                 {title}
 
                             </p>
-                        </Link>
+                        </a>
                         <Link
                             className="text-gray-400 text-xs mt-2 hover:text-gray-600"
                             to={'/'}
+                        // onClick={(e) => filterByAuthorHandler(author)}
 
                         >
-                            {viewsCount} views {likes?.length} likes
 
                         </Link>
+                        <p className="text-gray-400 text-xs mt-1">
+                            author: {authorName} 🔥
+                        </p>
+
+
+
+                        <button onClick={() => handleDelete(_id)} className="text-red-800 bg-red-200 px-2 py-1 font-medium rounded-lg text-xs mt-1 disabled:opacity-50">
+                            Delete
+                        </button>
+
 
                     </div>
                 </div>
             </div>
         </div>
+
     )
 }
 
-export default RelatedVideoCard
+export default WishCard
+
+

@@ -12,8 +12,6 @@ const LoginPage = () => {
 
     const [login, { data, isLoading, error: responseError }] = useLoginMutation();
 
-    console.log(data);
-
 
     const navigate = useNavigate();
 

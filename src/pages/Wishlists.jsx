@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
-import { useDeleteWishlistMutation, useFetchAllWishlistsQuery, useFetchWishlistsQuery } from '../features/wishlists/wishlistsApi'
+import Loading from '../components/ui/Loading';
+import WishCard from '../components/wishlist/WishCard';
+import { useFetchAllWishlistsQuery, useFetchWishlistsQuery } from '../features/wishlists/wishlistsApi'
 
 const Wishlists = () => {
 
@@ -13,40 +14,61 @@ const Wishlists = () => {
 
   const userId = localUser?.user?._id
 
-  //const { data: mywishlists, isError, isLoading, error } = useFetchWishlistsQuery(userId);
   const { data: mywishlists, isError, isLoading, error } = useFetchAllWishlistsQuery() || {};
 
-  const [deleteWishlist, { isError: wishlistIsError, isLoading: wishlistIsLoading, error: wishError }] = useDeleteWishlistMutation() || {};
+
+  let content;
+
+  if (isLoading) content = <Loading />;
+
+  if (!isLoading && isError) content = <div className="col-span-12">{error}</div>
+
+  if (!isError && !isLoading && mywishlists?.length === 0) {
+    content = <div className="col-span-12">No Videos Found!</div>;
+  }
+
+  if (!isError && !isLoading && mywishlists?.length > 0) {
+
+    content = mywishlists?.filter((item) => item?.authorName?.includes(localUser?.user?.username)).map((wishlist) => {
+      return <WishCard key={wishlist?._id} wishlist={wishlist} />
+    })
 
 
-  // delete wishlist item
-
-  const handleDelete = (id) => {
-    deleteWishlist(id);
   }
 
 
   return (
-    <div>
-      <h1>Wishlists</h1>
+    <>
 
-      {mywishlists?.length > 0 && mywishlists?.filter((item) => item?.authorName?.includes(localUser?.user?.username)).map((item) => {
-        return <div key={item._id} href="#" className="flex flex-row mx-1 my-1 px-1 py-1 items-center bg-white rounded-lg border shadow-md md:flex-row sm:flex-col md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-          <img className="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={item.thumbnailUrl} alt="" />
-          <div className="flex flex-col justify-between p-4 leading-normal">
-            <a href={`videos/${item.video_id}`}><h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{item.title}</h5></a>
-            <hr />
-            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-600 dark:text-white">{item.category}</h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">author: {item.authorName}</p>
-            <button className='bg-red-600 rounded-lg w-24 text-sm text-red-200 mx-1 my-2 px-2 py-2' onClick={() => handleDelete(item._id)}>Remove</button>
+      <section className="pt-10">
+        <h2 className='text-center text-bold px-1 py-1 mx-auto'>My Favourites Collection ❤️</h2>
+        <hr />
+        <section className="pt-10">
+          <div
+            className="grid grid-cols-12 gap-4 max-w-6xl mx-auto px-4 lg:px-0 min-h-[300px]"
+          >
+
+            {content}
+
           </div>
-        </div>
-      })
+        </section>
+      </section>
 
-      }
-
-    </div>
+    </>
   )
 }
 
 export default Wishlists
+
+
+{/* <section className="pt-12">
+            <section className="pt-12">
+                <div
+                    className="grid grid-cols-12 gap-4 max-w-7xl mx-auto px-5 lg:px-0 min-h-[300px]"
+                >
+
+                    {content}
+
+                </div>
+            </section>
+        </section> */}

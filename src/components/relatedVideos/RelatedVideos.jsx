@@ -9,6 +9,8 @@ const RelatedVideos = ({ currentVideoId, category }) => {
 
     const matchedData = allVideoLists?.filter((relatedVideo) => relatedVideo?.category?.toLowerCase().includes(category?.toLowerCase()));
 
+    console.log('matchedData', matchedData);
+
     let content;
 
     if (isLoading) content = <Loading />;
@@ -30,7 +32,7 @@ const RelatedVideos = ({ currentVideoId, category }) => {
 
     return (
         <div>
-            <h2>RelatedVideos category -{category} | currentId: {currentVideoId}</h2>
+            <h2 className='text-center text-medium mx-auto mx-1 my-1'>RelatedVideos</h2>
 
             {matchedData?.slice(0, 10).filter((data) => data?._id !== currentVideoId).map((item) => {
                 return <RelatedVideoCard key={item._id} relatedVideo={item} currentVideoId={currentVideoId} />

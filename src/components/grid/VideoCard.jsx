@@ -1,7 +1,5 @@
 import React from 'react'
-//import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-//import { getVideosByAuthor } from '../../features/videos/videosSlice';
 import LogoAvatar from '../../assets/lws.svg';
 import { useAddWishlistMutation, useFetchAllWishlistsQuery } from '../../features/wishlists/wishlistsApi';
 import moment from 'moment';
@@ -26,14 +24,16 @@ const VideoCard = ({ video }) => {
 
     const [addWishlist] = useAddWishlistMutation() || {};
 
+    // disables button function
+    const filterDataForDisabled = (arrayWishlists, currentVideo, currentUser) => {
+        const result = arrayWishlists?.find((item) => item?.video_id === currentVideo?._id && item?.authorName === currentUser?.username)
+        return result;
+    }
 
     const addToWishlist = (videoData) => {
 
 
-        const allWishLists = allWishlists;
-        console.log('all wishlists', allWishLists);
-
-        // const existedData = allWishlists?.find((item) => item?.video_id === videoData?._id);
+        //const existedData = allWishlists?.find((item) => item?.video_id === videoData?._id);
 
         // const sameUser = existedData?.authorName === mainUser?.user?.username
 
@@ -108,17 +108,12 @@ const VideoCard = ({ video }) => {
                             {likeCount} likes . {viewsCount} views  {moment(createdAt).format('YYYY-MM-DD')}
                         </p>
 
-                        <button onClick={() => addToWishlist(video)} className="text-green-600 font-bold rounded-lg text-xs mt-1">
+
+
+                        <button onClick={() => addToWishlist(video)} disabled={filterDataForDisabled(allWishlists, video, mainUser?.user)} className="text-green-800 bg-green-200 px-1 py-0.5 font-medium rounded-lg text-xs mt-1 disabled:opacity-50">
                             Add Wishlist
                         </button>
 
-                        {/* <button style={{ float: 'right'}} className="text-white rounded px-1 py-1 bg-red-600 mx-1 text-xs mt-1">
-                    Delete
-                </button>
-
-                <button style={{ float: 'right'}} className="text-white rounded px-1 py-1 bg-red-600 text-xs mx-1 mt-1">
-                    Edit
-                </button>   */}
 
                     </div>
                 </div>
