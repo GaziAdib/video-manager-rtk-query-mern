@@ -3,11 +3,17 @@ import { Link } from 'react-router-dom';
 import LogoAvatar from '../../assets/lws.svg';
 import { useAddWishlistMutation, useFetchAllWishlistsQuery } from '../../features/wishlists/wishlistsApi';
 import moment from 'moment';
+import { useState } from 'react';
+import Player from '../description/Player';
 
 
 const VideoCard = ({ video }) => {
 
-    const { _id, thumbnailUrl, title, likeCount, category, author, viewsCount, createdAt } = video;
+    // hover effect state
+    const [hovered, setHovered] = useState(false);
+    /// end test
+
+    const { _id, thumbnailUrl, title, likeCount, category, author, viewsCount, videoUrl, createdAt } = video;
 
     const authUser = localStorage.getItem('auth');
 
@@ -54,10 +60,92 @@ const VideoCard = ({ video }) => {
         }
     }
 
+    // on mouse hover function
+
+    const onMouseHoverHandler = (e) => {
+        setHovered(true);
+    }
+
+    const onMouseHoverRemove = (e) => {
+        setHovered(false);
+    }
 
 
     return (
         <div
+            className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]"
+        >
+            <div className="w-full flex flex-col">
+                <div onMouseOver={onMouseHoverHandler} onMouseLeave={onMouseHoverRemove} className="relative">
+                    <Link to={`videos/${_id}`}>
+                        {hovered ? (
+                            <Player autoplay={hovered ? '1' : '0'} videoUrl={videoUrl} title={title} />
+                        ) : (
+                            <img
+                                id='videoThumnail'
+                                src={thumbnailUrl}
+                                className="w-full h-auto"
+                                alt={title}
+                            />
+                        )}
+                    </Link>
+
+                    <p
+                        className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py"
+                    >
+                        {category}
+                    </p>
+                </div>
+
+                <div className="flex flex-row mt-2 gap-2">
+                    <Link to={`videos/${_id}`} className="shrink-0">
+                        <img
+                            src={LogoAvatar}
+                            className="rounded-full h-6 w-6"
+                            alt={author}
+                        />
+                    </Link>
+
+                    <div clas="flex flex-col">
+                        <Link to={`videos/${_id}`}>
+                            <p
+                                className="text-slate-900 text-sm font-semibold"
+                            >
+                                {title}
+
+                            </p>
+                        </Link>
+                        <Link
+                            className="text-gray-400 text-xs mt-2 hover:text-gray-600"
+                            to={'/'}
+                        // onClick={(e) => filterByAuthorHandler(author)}
+
+                        >
+                            {author}
+
+                        </Link>
+                        <p className="text-gray-400 text-xs mt-1">
+                            {likeCount} likes . {viewsCount} views  {moment(createdAt).format('YYYY-MM-DD')}
+                        </p>
+
+                        <button>Hover</button>
+
+                        <button onClick={() => addToWishlist(video)} disabled={filterDataForDisabled(allWishlists, video, mainUser?.user)} className="text-green-800 bg-green-200 px-1 py-0.5 font-medium rounded-lg text-xs mt-1 disabled:opacity-50">
+                            Add Wishlist
+                        </button>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default VideoCard
+
+
+{/* <div
             className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]"
         >
             <div className="w-full flex flex-col">
@@ -118,8 +206,4 @@ const VideoCard = ({ video }) => {
                     </div>
                 </div>
             </div>
-        </div>
-    )
-}
-
-export default VideoCard
+        </div> */}
