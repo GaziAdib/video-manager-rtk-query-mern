@@ -1,38 +1,55 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import { useDeleteCommentMutation, useFetchCommentsQuery } from '../../features/comments/commentsApi'
+import { useFetchCommentsQuery } from '../../features/comments/commentsApi'
+import CommentCard from './CommentCard';
 
 const CommentLists = ({ id }) => {
 
     const { data: comments, isLoading, isError, isSuccess } = useFetchCommentsQuery(id) || {};
 
-    const [deleteComment] = useDeleteCommentMutation() || {}
-
-    //const { user } = useSelector((state) => state.auth) || {};
-    const localUser = localStorage.getItem('auth');
-    const mainUser = JSON.parse(localUser);
-
-    const deleteCommentHandler = (commentData) => {
-        // delete api
-
-        if (mainUser?.user?.username === commentData.authorName) {
-            deleteComment(commentData._id);
-        } else {
-            alert('you are not authorize to delete this comment!');
-        }
-    }
+    const totalComments = comments?.length;
 
     return (
-        <div>
-            <h2>Comments</h2>
+        <div class="antialiased mx-auto max-w-screen-sm">
+            <h3 className="mb-4 text-lg font-semibold text-gray-900">Comments ({totalComments})</h3>
+            <br />
             {
-                comments?.length > 0 && comments?.map((comment) => {
-                    return <p key={comment._id}>comment: {comment.content} by ({comment?.authorName}) {comment.authorName === mainUser?.user?.username && <span className='bg-red-600 mx-1 px-1' onClick={() => deleteCommentHandler(comment)}>Delete</span>
-                    } </p>
-                })
+                comments?.length > 0 ? (
+                    comments?.map((comment) => {
+                        return <CommentCard key={comment?._id} comment={comment} />
+                    })
+                ) : ('no comments for this video')
             }
         </div>
     )
 }
 
 export default CommentLists
+
+{/* <div class="flex justify-center relative top-1/3">
+
+
+
+
+<!-- This is an example component -->
+<div class="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg">
+    <div class="relative flex gap-4">
+        <img src="https://icons.iconarchive.com/icons/diversity-avatars/avatars/256/charlie-chaplin-icon.png" class="relative rounded-lg -top-8 -mb-4 bg-white border h-20 w-20" alt="" loading="lazy">
+        <div class="flex flex-col w-full">
+            <div class="flex flex-row justify-between">
+                <p class="relative text-xl whitespace-nowrap truncate overflow-hidden">COMMENTOR</p>
+                <a class="text-gray-500 text-xl" href="#"><i class="fa-solid fa-trash"></i></a>
+            </div>
+            <p class="text-gray-400 text-sm">20 April 2022, at 14:88 PM</p>
+        </div>
+    </div>
+    <p class="-mt-4 text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Maxime quisquam vero adipisci beatae voluptas dolor ame.</p>
+</div>
+
+
+
+</div> */}
+
+// comments?.length > 0 && comments?.map((comment) => {
+//     return <p key={comment._id}>comment: {comment.content} by ({comment?.authorName}) {comment.authorName === mainUser?.user?.username && <span className='bg-red-600 mx-1 px-1' onClick={() => deleteCommentHandler(comment)}>Delete</span>
+//     } </p>
+// })

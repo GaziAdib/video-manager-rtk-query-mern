@@ -58,13 +58,13 @@ const VideoDescription = ({ video }) => {
                 {description}
             </div>
 
-            {mainUser?.user?._id === authorId ? (<button onClick={() => deleteVideoHandler(_id)} style={{ float: 'right' }} className="text-white rounded px-2 py-1 bg-red-600 mx-1 text-xs mt-1">
+            {mainUser?.user?._id === authorId ? (<button onClick={() => deleteVideoHandler(_id)} style={{ float: 'right' }} className="text-white mb-3 rounded px-2 py-1 bg-red-600 mx-1 text-xs mt-1">
                 Delete
             </button>) : ('')
             }
 
 
-            {mainUser?.user?._id === authorId ? (<Link to={`/videos/${_id}/update`} style={{ float: 'right' }} className="text-white rounded px-2 py-1 bg-blue-600 text-xs mx-1 mt-1">
+            {mainUser?.user?._id === authorId ? (<Link to={`/videos/${_id}/update`} style={{ float: 'right' }} className="mv-3 text-white rounded px-2 py-1 bg-blue-600 text-xs mx-1 mt-1">
                 Edit
             </Link>
             ) : ('')

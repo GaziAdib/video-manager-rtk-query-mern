@@ -37,14 +37,21 @@ const AddCommentForm = ({ id }) => {
     return (
         <>
             <form onSubmit={addCommentHandler}>
-                <label htmlFor="content">Add comment</label>
-                <div>
-                    <input onBlur={() => content === '' && setIsFocus(false)} onFocus={() => setIsFocus(true)} type="text" required value={content} onChange={(e) => setContent(e.target.value)} placeholder="enter comment..." />
+                <div class="mb-4 w-full bg-blue-50 rounded-lg border border-blue-200 light:bg-white-700 light:border-blue-600">
+                    <div class="py-2 px-2 bg-white rounded-t-lg light:bg-blue-800">
+                        <label for="comment" class="sr-only">Write Your comment</label>
+                        <textarea onBlur={() => content === '' && setIsFocus(false)} onFocus={() => setIsFocus(true)} value={content} onChange={(e) => setContent(e.target.value)} id="comment" rows="4" class="px-0 w-full text-sm text-black bg-white border-0 light:bg-blue-800 focus:ring-0 light:text-white light:placeholder-blue-400" placeholder="Write a comment..." required></textarea>
+                    </div>
+                    <div class="flex justify-between items-center py-2 px-2 border-t light:border-blue-600">
+                        {isFocus &&
+                            <button type="submit" class="inline-flex items-center py-2 px-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                                Post comment
+                            </button>
+                        }
+                    </div>
                 </div>
-
-                {isFocus && <button className='bg-green-600 text-white rounded-lg mx-1 my-1 px-1' type="submit">Add Comment</button>}
-
             </form>
+
         </>
     )
 
@@ -54,3 +61,15 @@ const AddCommentForm = ({ id }) => {
 
 export default AddCommentForm
 
+
+
+
+{/* <form onSubmit={addCommentHandler}>
+                <label htmlFor="content">Add comment</label>
+                <div>
+                    <input onBlur={() => content === '' && setIsFocus(false)} onFocus={() => setIsFocus(true)} type="text" required value={content} onChange={(e) => setContent(e.target.value)} placeholder="enter comment..." />
+                </div>
+
+                {isFocus && <button className='bg-green-600 text-white rounded-lg mx-1 my-1 px-1' type="submit">Add Comment</button>}
+
+            </form> */}
