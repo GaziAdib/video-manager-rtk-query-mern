@@ -11,10 +11,14 @@ import RegistrationPage from './pages/RegistrationPage';
 import PublicRoute from './components/routes/PublicRoute';
 import PrivateRoute from './components/routes/PrivateRoute';
 import EditVideoPage from './pages/EditVideoPage';
+import useAuthCheck from './hooks/useAuthCheck';
 
 
 function App() {
-  return (
+  const authChecked = useAuthCheck();
+
+
+  return !authChecked ? <div>Checking Authentication</div> : (
     <Router>
       <Navbar />
       <Routes>
