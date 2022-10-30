@@ -14,10 +14,6 @@ const AddCommentForm = ({ id }) => {
 
     const [isFocus, setIsFocus] = useState(false);
 
-    const localUser = localStorage.getItem('auth');
-
-    const localFinalUser = JSON.parse(localUser);
-
 
     const addCommentHandler = (e) => {
         e.preventDefault();
@@ -25,7 +21,7 @@ const AddCommentForm = ({ id }) => {
         addComment({
             id: id,
             data: {
-                authorName: localFinalUser?.user?.username,
+                authorName: user?.username,
                 video_id: id,
                 content: content
             }

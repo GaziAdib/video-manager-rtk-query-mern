@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useUpdateVideoMutation } from '../../features/videos/videosApi';
 import Error from '../ui/Error';
 
 const EditForm = ({ singleVideoData }) => {
-    const userLocal = localStorage.getItem('auth');
-    const mainUser = JSON.parse(userLocal);
+
+    const { user } = useSelector((state) => state?.auth);
 
     const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const EditForm = ({ singleVideoData }) => {
         e.preventDefault();
 
 
-        if (mainUser?.user?._id === singleVideoData?.authorId) {
+        if (user?._id === singleVideoData?.authorId) {
             updateVideo({
                 videoId: _id,
                 data: {
@@ -42,6 +43,7 @@ const EditForm = ({ singleVideoData }) => {
                     videoUrl
                 }
             })
+
             navigate('/');
 
         } else {

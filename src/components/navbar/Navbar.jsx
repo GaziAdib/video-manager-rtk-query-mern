@@ -11,17 +11,15 @@ import { useFetchAllWishlistsQuery } from '../../features/wishlists/wishlistsApi
 const Navbar = () => {
 
     const { search } = useSelector((state) => state?.videos);
+    const { user } = useSelector((state) => state?.auth);
 
 
     const dispatch = useDispatch();
-    const localUser = localStorage.getItem("auth");
-    const mainUser = JSON.parse(localUser);
 
-    //const { user } = useSelector((state) => state?.auth);
 
     const { data: mywishlists, isError, isLoading, error } = useFetchAllWishlistsQuery() || {};
 
-    const lengthWishlist = mywishlists?.filter((item) => item?.authorName === mainUser?.user?.username).length;
+    const lengthWishlist = mywishlists?.filter((item) => item?.authorName === user?.username).length;
 
 
 
@@ -49,13 +47,13 @@ const Navbar = () => {
                     />
                 </Link>
 
-                {mainUser !== '' && <Link to='/addVideo'>
+                {user !== '' && <Link to='/addVideo'>
                     <span>AddView</span>
                 </Link>}
 
 
 
-                {mainUser !== '' && <Link to='/my-wishlist'>
+                {user !== '' && <Link to='/my-wishlist'>
                     <span>Wishlist ({lengthWishlist})</span>
                 </Link>}
 
@@ -86,3 +84,7 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+
+// notes 
+

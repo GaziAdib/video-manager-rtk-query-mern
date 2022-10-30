@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { useDeleteCommentMutation } from '../../features/comments/commentsApi';
 
 
@@ -8,15 +9,13 @@ const CommentCard = ({ comment }) => {
 
     const [deleteComment] = useDeleteCommentMutation() || {}
 
-    const localUser = localStorage.getItem('auth');
-    const mainUser = JSON.parse(localUser)
-
-    const profileImage = mainUser?.user?.profileImage;
+    const { user } = useSelector((state) => state?.auth);
+    const { profileImage } = user || {};
 
 
     const deleteCommentHandler = (commentData) => {
 
-        if (mainUser?.user?.username === commentData?.authorName) {
+        if (user?.username === commentData?.authorName) {
             deleteComment(commentData._id);
         } else {
             alert('you are not authorize to delete this comment!');
@@ -34,7 +33,7 @@ const CommentCard = ({ comment }) => {
                 <p class="text-sm">
                     {content}
                 </p>
-                {mainUser?.user?.username === comment?.authorName && <button style={{ float: 'right' }} className='mx-1 px-1 rounded-lg bg-red-200 text-red-600' onClick={() => deleteCommentHandler(comment)}>Delete</button>}
+                {user?.username === comment?.authorName && <button style={{ float: 'right' }} className='mx-1 px-1 rounded-lg bg-red-200 text-red-600' onClick={() => deleteCommentHandler(comment)}>Delete</button>}
             </div>
 
         </div>

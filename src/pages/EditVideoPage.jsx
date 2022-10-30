@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFetchSingleVideoQuery } from '../features/videos/videosApi';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import EditForm from '../components/FormData/EditForm';
 
 const EditVideoPage = () => {
@@ -11,7 +11,9 @@ const EditVideoPage = () => {
 
   return (
     <div className="w-full max-w-xs mx-auto pt-2 pb-2 my-2">
-      <EditForm singleVideoData={singleVideoData} />
+      {!isLoading && !isError && singleVideoData &&
+        <EditForm singleVideoData={singleVideoData} />
+      }
     </div>
   )
 }

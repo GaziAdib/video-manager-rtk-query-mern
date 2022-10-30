@@ -6,8 +6,7 @@ import { search } from '../../features/videos/videoSlice';
 
 const Search = () => {
   const dispatch = useDispatch();
-  //const { search } = useSelector(state => state.filter);
-  //const [input, setInput] = useState(search);
+
   const [input, setInput] = useState('');
 
   const match = useMatch("/");
@@ -15,29 +14,27 @@ const Search = () => {
 
 
   // form on submit
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(search(input));
-  // if use not in  home page redirect to home page
 
-    if(!match) {
-        navigate("/");
+    if (!match) {
+      navigate("/");
     }
   }
 
-  
+
 
   return (
     <form onSubmit={handleSubmit}>
-        <input
-            className="outline-none border-none mr-2"
-            type="search"
-            name="search"
-            placeholder="Search"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-        />
+      <input
+        className="outline-none border-none mr-2"
+        type="search"
+        name="search"
+        placeholder="Search"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
     </form>
   )
 }

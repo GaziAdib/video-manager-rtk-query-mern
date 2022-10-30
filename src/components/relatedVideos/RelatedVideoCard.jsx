@@ -1,17 +1,14 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import LogoAvatar from '../../assets/lws.svg';
 
 
 const RelatedVideoCard = ({ relatedVideo }) => {
 
     const { _id, title, thumbnailUrl, category, viewsCount, likes } = relatedVideo || {};
 
-    const localUser = localStorage.getItem('auth');
-    const mainUser = JSON.parse(localUser);
-
-    const { profileImage } = mainUser?.user;
-
+    const { user } = useSelector((state) => state?.auth);
+    const { profileImage } = user || {};
 
 
     return (
@@ -36,7 +33,7 @@ const RelatedVideoCard = ({ relatedVideo }) => {
                 </div>
 
                 <div className="flex flex-row mt-2 gap-2">
-                    <Link to={`videos/${_id}`} className="shrink-0">
+                    <Link to={`/videos/${_id}`} className="shrink-0">
                         <img
                             src={profileImage}
                             className="rounded-full h-6 w-6"

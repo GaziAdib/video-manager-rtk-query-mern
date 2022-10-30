@@ -15,9 +15,7 @@ const LikeUnlike = ({ likeCount, unlikeCount, authorId, likes }) => {
     const [likeVideoByAuthor] = useLikeVideoByAuthorMutation(videoId) || {};
     const [unlikeVideoByAuthor] = useUnlikeVideoByAuthorMutation(videoId) || {};
 
-    const { user } = useSelector((state) => state.auth) || {};
-    // const localUser = localStorage.getItem('auth');
-    // const mainUser = JSON.parse(localUser)
+    const { user } = useSelector((state) => state?.auth) || {};
 
 
     // like video function

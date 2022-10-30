@@ -2,14 +2,14 @@ import React from 'react';
 import LogoAvatar from '../../assets/lws.svg';
 import { Link } from 'react-router-dom';
 import { useDeleteWishlistMutation } from '../../features/wishlists/wishlistsApi';
+import { useSelector } from 'react-redux';
 
 const WishCard = ({ wishlist }) => {
 
     const { _id, authorName, title, category, thumbnailUrl, video_id } = wishlist || {};
 
-    const localUser = localStorage.getItem('auth');
-    const mainUser = JSON.parse(localUser);
-    const { profileImage } = mainUser?.user;
+    const { user } = useSelector((state) => state?.auth);
+    const { profileImage } = user || {};
 
 
     const [deleteWishlist, { isError, isLoading, error }] = useDeleteWishlistMutation() || {};
