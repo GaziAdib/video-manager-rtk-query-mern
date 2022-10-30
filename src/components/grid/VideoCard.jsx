@@ -90,11 +90,13 @@ const VideoCard = ({ video }) => {
                         )}
                     </Link>
 
-                    <p
-                        className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py"
-                    >
-                        {category}
-                    </p>
+                    {hovered ? '' : (
+                        <p
+                            className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py"
+                        >
+                            {category}
+                        </p>
+                    )}
                 </div>
 
                 <div className="flex flex-row mt-2 gap-2">
