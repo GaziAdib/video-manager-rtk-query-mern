@@ -1,14 +1,10 @@
 import React from 'react'
-//import { useEffect } from 'react'
-//import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import AddCommentForm from '../components/description/AddCommentForm';
-import CommentLists from '../components/description/CommentLists';
+import AddCommentForm from '../components/commentSection/AddCommentForm';
+import CommentLists from '../components/commentSection/CommentLists';
 import VideoPlayer from '../components/description/Player'
 import VideoDescription from '../components/description/VideoDescription'
 import RelatedVideos from '../components/relatedVideos/RelatedVideos';
-//import RelatedVideoList from '../components/list/RelatedVideoList'
-//import { fetchVideo } from '../features/video/videoSlice'
 import Loading from '../components/ui/Loading';
 import { useFetchSingleVideoQuery } from '../features/videos/videosApi';
 
@@ -51,9 +47,6 @@ const VideoDetailPage = () => {
             </div>
 
             <RelatedVideos currentVideoId={_id} category={category} />
-            {/* <RelatedVideoList currentVideoId={id} tags={tags} /> */}
-
-
 
         </div>
     }

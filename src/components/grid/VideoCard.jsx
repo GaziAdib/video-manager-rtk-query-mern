@@ -100,7 +100,7 @@ const VideoCard = ({ video }) => {
                 <div className="flex flex-row mt-2 gap-2">
                     <Link to={`videos/${_id}`} className="shrink-0">
                         <img
-                            src={LogoAvatar}
+                            src={mainUser?.user?.profileImage}
                             className="rounded-full h-6 w-6"
                             alt={author}
                         />
