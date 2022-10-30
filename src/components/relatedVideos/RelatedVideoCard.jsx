@@ -45,7 +45,7 @@ const RelatedVideoCard = ({ relatedVideo }) => {
                     </Link>
 
                     <div clas="flex flex-col">
-                        <Link to={`videos/${_id}`}>
+                        <Link to={`/videos/${_id}`}>
                             <p
                                 className="text-slate-900 text-sm font-semibold"
                             >

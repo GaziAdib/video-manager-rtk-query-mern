@@ -7,13 +7,13 @@ import { clearSearch } from '../../features/videos/videoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLoggedOut } from '../../features/auth/authSlice';
 import { useFetchAllWishlistsQuery } from '../../features/wishlists/wishlistsApi';
-import { useEffect } from 'react';
-
 
 const Navbar = () => {
 
-    const dispatch = useDispatch();
+    const { search } = useSelector((state) => state?.videos);
 
+
+    const dispatch = useDispatch();
     const localUser = localStorage.getItem("auth");
     const mainUser = JSON.parse(localUser);
 
@@ -23,7 +23,6 @@ const Navbar = () => {
 
     const lengthWishlist = mywishlists?.filter((item) => item?.authorName === mainUser?.user?.username).length;
 
-    //const lengthWishlist = mywishlists?.filter((item) => item?.authorName === user?.username).length;
 
 
     // clear search
@@ -75,7 +74,7 @@ const Navbar = () => {
                         alt="Search"
                     />
 
-                    <span className='ml-3 pl-2' onClick={handleClear}>Clear</span>
+                    {search !== '' && <span className='ml-3 text-sm pl-1 pr-1 bg-red-200 text-red-600 rounded' onClick={handleClear}>Clear</span>}
                 </div>
                 <div style={{ float: 'right' }}>
                     <button className='bg-red-600 text-white mx-1 my-1 px-1 py-1 rounded' onClick={logoutHandler}>Logout</button>

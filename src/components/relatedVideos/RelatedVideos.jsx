@@ -19,15 +19,6 @@ const RelatedVideos = ({ currentVideoId, category }) => {
         content = <div className="col-span-12">No Videos Found!</div>;
     }
 
-    // if (matchedData?.length > 0 &&
-    //     matchedData?.map((item) => {
-
-    //         return content = <RelatedVideoCard relatedVideo={item} key={item?._id} />
-
-    //     })
-    // )
-
-
     return (
         <div>
             <h2 className='text-center text-medium mx-auto mx-1 my-1'>Related Videos</h2>
