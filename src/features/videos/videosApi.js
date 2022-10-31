@@ -112,46 +112,33 @@ export const videosApi = rootApi.injectEndpoints({
             async onQueryStarted(args, { queryFulfilled, dispatch }) {
                 try {
 
-                    const { data: likedData } = await queryFulfilled;
-                    console.log('inside first query')
-                    console.log(likedData?.message);
+                    await queryFulfilled;
+
 
                     dispatch(
                         rootApi.util.updateQueryData('fetchSingleVideo', args?.videoId, (draft) => {
-                            const videoData = draft;
+                            const videoData1 = draft;
 
-                            console.log(JSON.stringify(videoData))
-                            if (videoData?.likes?.indexOf(args?.authorId) == -1) {
-                                videoData?.likes?.push(args?.authorId);
+                            if (videoData1?.likes?.indexOf(args?.authorId) == -1) {
+                                videoData1?.likes?.push(args?.authorId);
                             }
-                            //videoData?.likes?.push(args?.authorId)
-                            // Object.assign(videoData, { likes: [args?.authorId] })
-
-                            // Object.assign(videoData, { likes: [args?.authorId] })
                         })
                     );
+
+                    dispatch(rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
+                        const videoData2 = draft?.find((video) => video?._id == args?.videoId)
+                        if (videoData2?.likes?.indexOf(args?.authorId) == -1) {
+                            videoData2?.likes?.push(args?.authorId);
+                        }
+                    }));
+
+
 
                 } catch (error) {
                     console.log(error);
                 }
             }
-            // async onQueryStarted(args, { queryFulfilled, dispatch }) {
-            //     try {
 
-            //         const { data: likedData } = await queryFulfilled;
-            //         console.log('inside second query')
-
-            //         dispatch(
-            //             rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
-            //                 const videoData = draft?.find((item) => item?._id === args?.videoId);
-            //                 Object.assign(videoData, { likes: [args?.authorId] });
-            //             })
-            //         );
-
-            //     } catch (error) {
-            //         console.log(error);
-            //     }
-            // }
         }),
 
         // update Video unlike By Users
@@ -166,43 +153,29 @@ export const videosApi = rootApi.injectEndpoints({
             async onQueryStarted(args, { queryFulfilled, dispatch }) {
                 try {
 
-                    const { data: likedData } = await queryFulfilled;
+                    await queryFulfilled;
 
                     dispatch(
                         rootApi.util.updateQueryData('fetchSingleVideo', args?.videoId, (draft) => {
-                            const videoData = draft;
-                            videoData?.likes?.pop(args?.authorId);
+                            const videoData1 = draft;
+                            if (videoData1?.likes?.includes(args?.authorId)) {
+                                videoData1?.likes?.pop(args?.authorId);
+                            }
+
                         })
                     );
 
-                    // dispatch(
-                    //     rootApi.util.updateQueryData('fetchVideos', args?.videoId, (draft) => {
-                    //         const videoData = draft.find((item) => item?._id === args?.videoId);
-                    //         videoData?.likes?.pop(args?.authorId);
-                    //     })
-                    // );
+                    dispatch(rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
+                        const videoData2 = draft?.find((video) => video?._id == args?.videoId);
+                        if (videoData2?.likes?.includes(args?.authorId)) {
+                            videoData2?.likes?.pop(args?.authorId);
+                        }
+                    }));
 
                 } catch (error) {
                     console.log(error);
                 }
             }
-            // async onQueryStarted(args, { queryFulfilled, dispatch }) {
-            //     try {
-
-            //         const { data: likedData } = await queryFulfilled;
-
-            //         dispatch(
-            //             rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
-            //                 const videoData = draft?.find((item) => item?._id === args?.videoId);
-            //                 videoData?.likes?.pop(args?.authorId);
-            //             })
-            //         );
-
-            //     } catch (error) {
-            //         console.log(error);
-            //     }
-            // }
-
         }),
 
         // search by title
