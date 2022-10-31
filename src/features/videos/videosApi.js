@@ -109,6 +109,49 @@ export const videosApi = rootApi.injectEndpoints({
                     likes: authorId
                 }
             }),
+            async onQueryStarted(args, { queryFulfilled, dispatch }) {
+                try {
+
+                    const { data: likedData } = await queryFulfilled;
+                    console.log('inside first query')
+                    console.log(likedData?.message);
+
+                    dispatch(
+                        rootApi.util.updateQueryData('fetchSingleVideo', args?.videoId, (draft) => {
+                            const videoData = draft;
+
+                            console.log(JSON.stringify(videoData))
+                            if (videoData?.likes?.indexOf(args?.authorId) == -1) {
+                                videoData?.likes?.push(args?.authorId);
+                            }
+                            //videoData?.likes?.push(args?.authorId)
+                            // Object.assign(videoData, { likes: [args?.authorId] })
+
+                            // Object.assign(videoData, { likes: [args?.authorId] })
+                        })
+                    );
+
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            // async onQueryStarted(args, { queryFulfilled, dispatch }) {
+            //     try {
+
+            //         const { data: likedData } = await queryFulfilled;
+            //         console.log('inside second query')
+
+            //         dispatch(
+            //             rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
+            //                 const videoData = draft?.find((item) => item?._id === args?.videoId);
+            //                 Object.assign(videoData, { likes: [args?.authorId] });
+            //             })
+            //         );
+
+            //     } catch (error) {
+            //         console.log(error);
+            //     }
+            // }
         }),
 
         // update Video unlike By Users
@@ -120,6 +163,46 @@ export const videosApi = rootApi.injectEndpoints({
                     likes: authorId
                 }
             }),
+            async onQueryStarted(args, { queryFulfilled, dispatch }) {
+                try {
+
+                    const { data: likedData } = await queryFulfilled;
+
+                    dispatch(
+                        rootApi.util.updateQueryData('fetchSingleVideo', args?.videoId, (draft) => {
+                            const videoData = draft;
+                            videoData?.likes?.pop(args?.authorId);
+                        })
+                    );
+
+                    // dispatch(
+                    //     rootApi.util.updateQueryData('fetchVideos', args?.videoId, (draft) => {
+                    //         const videoData = draft.find((item) => item?._id === args?.videoId);
+                    //         videoData?.likes?.pop(args?.authorId);
+                    //     })
+                    // );
+
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            // async onQueryStarted(args, { queryFulfilled, dispatch }) {
+            //     try {
+
+            //         const { data: likedData } = await queryFulfilled;
+
+            //         dispatch(
+            //             rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
+            //                 const videoData = draft?.find((item) => item?._id === args?.videoId);
+            //                 videoData?.likes?.pop(args?.authorId);
+            //             })
+            //         );
+
+            //     } catch (error) {
+            //         console.log(error);
+            //     }
+            // }
+
         }),
 
         // search by title
