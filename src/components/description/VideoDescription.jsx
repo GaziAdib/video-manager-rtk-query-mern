@@ -4,6 +4,9 @@ import { useDeleteVideoMutation } from '../../features/videos/videosApi';
 import LikeUnlike from './LikeUnlike';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import EditIcon from '../../assets/edit_icon.png';
+import DeleteIcon from '../../assets/delete_icon.png';
+
 
 const VideoDescription = ({ video }) => {
 
@@ -40,7 +43,13 @@ const VideoDescription = ({ video }) => {
                 </h2>
 
                 <h2
-                    className="text-sm leading-[1.7142857] text-slate-600 w-full"
+                    className="text-sm  text-slate-600 w-24"
+                >
+                    {likes?.length > 0 ? likes?.length : '0'} likes
+                </h2>
+
+                <h2
+                    className="text-sm leading-[1.7142857] text-slate-600 w-24"
                 >
                     {moment(createdAt).format('YYYY-MM-DD')}
                 </h2>
@@ -57,14 +66,14 @@ const VideoDescription = ({ video }) => {
                 {description}
             </div>
 
-            {user?._id === authorId ? (<button onClick={() => deleteVideoHandler(_id)} style={{ float: 'right' }} className="text-white mb-3 rounded px-2 py-1 bg-red-600 mx-1 text-xs mt-1">
-                Delete
+            {user?._id === authorId ? (<button onClick={() => deleteVideoHandler(_id)} style={{ float: 'right' }} className="shadow mb-3 px-2  my-2 text-sm mt-1">
+                <img src={DeleteIcon} height="25px" width="25px" />
             </button>) : ('')
             }
 
 
-            {user?._id === authorId ? (<Link to={`/videos/${_id}/update`} style={{ float: 'right' }} className="mv-3 text-white rounded px-2 py-1 bg-blue-600 text-xs mx-1 mt-1">
-                Edit
+            {user?._id === authorId ? (<Link to={`/videos/${_id}/update`} style={{ float: 'right' }} className="shadow mb-3 px-2 mx-1 my-2 text-sm mt-1">
+                <img src={EditIcon} height="25px" width="25px" />
             </Link>
             ) : ('')
             }

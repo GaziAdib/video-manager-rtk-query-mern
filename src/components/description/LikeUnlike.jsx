@@ -37,7 +37,7 @@ const LikeUnlike = ({ likeCount, unlikeCount, authorId, likes }) => {
     }
 
     return (
-        <div className="flex gap-10 w-48">
+        <div className="flex gap-10 w-48 ml-auto mt-1">
             <div className="flex gap-1">
                 <div className="shrink-0">
                     <img
@@ -50,7 +50,7 @@ const LikeUnlike = ({ likeCount, unlikeCount, authorId, likes }) => {
                 <div
                     className="text-sm leading-[1.7142857] text-slate-600"
                 >
-                    total likes: {likes?.length}
+                    like
                 </div>
             </div>
             <div className="flex gap-1">
@@ -65,7 +65,7 @@ const LikeUnlike = ({ likeCount, unlikeCount, authorId, likes }) => {
                 <div
                     className="text-sm leading-[1.7142857] text-slate-600"
                 >
-                    {unlikeCount}K
+                    unlike
                 </div>
             </div>
         </div>

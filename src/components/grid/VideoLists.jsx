@@ -1,7 +1,5 @@
 import React from 'react'
-//import VideoGridItem from './VideoGridItem'
 import { useSelector } from 'react-redux'
-//import { fetchVideos } from '../../features/videos/videosSlice';
 import Loading from '../ui/Loading';
 import { useFetchVideosQuery, useSearchByTitleQuery } from '../../features/videos/videosApi';
 import VideoCard from './VideoCard';
