@@ -10,7 +10,7 @@ const EditVideoPage = () => {
   const { data: singleVideoData, isLoading, isError, error } = useFetchSingleVideoQuery(videoId);
 
   return (
-    <div className="w-full max-w-xs mx-auto pt-2 pb-2 my-2">
+    <div className="w-full mx-auto pt-1 pb-1 px-1 my-2">
       {!isLoading && !isError && singleVideoData &&
         <EditForm singleVideoData={singleVideoData} />
       }

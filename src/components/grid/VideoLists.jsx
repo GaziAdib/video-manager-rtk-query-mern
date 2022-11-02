@@ -10,7 +10,7 @@ const VideoLists = () => {
 
     const { search } = useSelector((state) => state?.videos);
 
-    const { data: searchedVideoResults } = useSearchByTitleQuery(search)
+    const { data: searchedVideoResults } = useSearchByTitleQuery(search) || {};
 
     let content;
 
@@ -33,8 +33,6 @@ const VideoLists = () => {
         }))
 
     }
-
-
 
 
 
