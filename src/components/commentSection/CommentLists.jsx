@@ -11,7 +11,7 @@ const CommentLists = ({ id }) => {
     const totalComments = comments?.length;
 
     return (
-        <div class="antialiased mx-auto max-w-screen-sm">
+        <div className="antialiased mx-auto max-w-screen-sm">
             <h3 className="mb-4 text-lg font-semibold text-gray-900">Comments ({totalComments})</h3>
             <br />
             {

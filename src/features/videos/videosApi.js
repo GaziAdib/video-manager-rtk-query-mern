@@ -44,7 +44,7 @@ export const videosApi = rootApi.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
 
-                    const { data: videoData } = await queryFulfilled;
+                    await queryFulfilled;
 
                     dispatch(
                         rootApi.util.updateQueryData(
@@ -74,8 +74,7 @@ export const videosApi = rootApi.injectEndpoints({
             async onQueryStarted(args, { queryFulfilled, dispatch }) {
                 try {
 
-                    const { data: updatedVideo } = await queryFulfilled;
-                    console.log(args);
+                    await queryFulfilled;
 
                     dispatch(rootApi.util.updateQueryData('fetchSingleVideo', args?.videoId, (draft) => {
                         var video = draft;
@@ -86,9 +85,7 @@ export const videosApi = rootApi.injectEndpoints({
                             description: args?.data?.description,
                             thumbnailUrl: args?.data?.thumbnailUrl,
                             videoUrl: args?.data?.videoUrl
-
-                        })
-
+                        });
                     }));
 
                     dispatch(
@@ -136,7 +133,7 @@ export const videosApi = rootApi.injectEndpoints({
                     );
 
                     dispatch(rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
-                        const videoData2 = draft?.find((video) => video?._id == args?.videoId)
+                        const videoData2 = draft?.find((video) => video?._id === args?.videoId)
                         if (videoData2?.likes?.indexOf(args?.authorId) == -1) {
                             videoData2?.likes?.push(args?.authorId);
                         }
@@ -176,7 +173,7 @@ export const videosApi = rootApi.injectEndpoints({
                     );
 
                     dispatch(rootApi.util.updateQueryData('fetchVideos', undefined, (draft) => {
-                        const videoData2 = draft?.find((video) => video?._id == args?.videoId);
+                        const videoData2 = draft?.find((video) => video?._id === args?.videoId);
                         if (videoData2?.likes?.includes(args?.authorId)) {
                             videoData2?.likes?.pop(args?.authorId);
                         }

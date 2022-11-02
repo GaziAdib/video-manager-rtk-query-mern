@@ -24,13 +24,13 @@ const CommentCard = ({ comment }) => {
 
 
     return (
-        <div class="flex m-2">
-            <div class="flex-shrink-0 mr-2">
-                <img class="mt-2 rounded-full w-6 h-6 sm:w-10 sm:h-10" src={profileImage} alt="" />
+        <div className="flex m-2">
+            <div className="flex-shrink-0 mr-2">
+                <img className="mt-2 rounded-full w-6 h-6 sm:w-10 sm:h-10" src={profileImage} alt="" />
             </div>
-            <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
-                <strong>{authorName}</strong> <span class="text-xs text-gray-400">{createdAt}</span>
-                <p class="text-sm">
+            <div className="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
+                <strong>{authorName}</strong> <span className="text-xs text-gray-400">{createdAt}</span>
+                <p className="text-sm">
                     {content}
                 </p>
                 {user?.username === comment?.authorName && <button style={{ float: 'right' }} className='mx-1 px-1 rounded-lg bg-red-200 text-red-600' onClick={() => deleteCommentHandler(comment)}>Delete</button>}
