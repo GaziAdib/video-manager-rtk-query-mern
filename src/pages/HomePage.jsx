@@ -6,11 +6,11 @@ const HomePage = () => {
 
 
 
-  return ( 
+  return (
     <>
       <VideoLists />
     </>
-    
+
   )
 }
 
