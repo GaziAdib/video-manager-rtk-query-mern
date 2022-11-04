@@ -29,7 +29,6 @@ export const commentsApi = rootApi.injectEndpoints({
 
                     dispatch(
                         rootApi.util.updateQueryData('fetchComments', args?.id, (draft) => {
-                            // console.log(JSON.stringify(draft));
                             draft?.push(createdComment);
                         })
                     )
@@ -41,11 +40,32 @@ export const commentsApi = rootApi.injectEndpoints({
         }),
         // delete comment
         deleteComment: builder.mutation({
-            query: (id) => ({
-                url: `/videos/${id}/comment/delete`,
+            query: (videoId) => ({
+                url: `/videos/${videoId}/comment/delete`,
                 method: 'DELETE'
             }),
             invalidatesTags: ['Comment']
+            // async onQueryStarted(args, { queryFulfilled, dispatch }) {
+            //     try {
+
+            //         await queryFulfilled;
+
+            //         dispatch(
+            //             rootApi.util.updateQueryData(
+            //                 'fetchComments',
+            //                 args?.videoId,
+            //                 (draft) => {
+            //                     return draft.filter(
+            //                         (c) => c?._id != args && c?.video_id == args
+            //                     );
+            //                 }
+            //             )
+            //         );
+
+            //     } catch (error) {
+            //         console.log(error);
+            //     }
+            // }
         })
     })
 })

@@ -35,9 +35,13 @@ const AddCommentForm = ({ id }) => {
         <>
             <form onSubmit={addCommentHandler}>
                 <div className="mb-4 w-full bg-blue-50 rounded-lg border border-blue-200 light:bg-white-700 light:border-blue-600">
-                    <div className="py-2 px-2 bg-white rounded-t-lg light:bg-blue-800">
-                        <label for="comment" className="sr-only">Write Your comment</label>
-                        <textarea onBlur={() => content === '' && setIsFocus(false)} onFocus={() => setIsFocus(true)} value={content} onChange={(e) => setContent(e.target.value)} id="comment" rows="4" className="px-0 w-full text-sm text-black bg-white border-0 light:bg-blue-800 focus:ring-0 light:text-white light:placeholder-blue-400" placeholder="Write a comment..." required></textarea>
+                    <div className="py-1 px-2 bg-white rounded-t-lg light:bg-blue-800">
+                        <label for="comment" className="sr-only">Write Your comment...</label>
+                        <textarea
+                            onBlur={() => content === '' && setIsFocus(false)}
+                            onFocus={() => setIsFocus(true)} value={content}
+                            onChange={(e) => setContent(e.target.value)} id="comment" rows="4"
+                            className="px-0 w-full text-sm text-black bg-white border-0 light:bg-blue-800 light:placeholder-blue-400" placeholder="Write a comment..." required></textarea>
                     </div>
                     <div className="flex justify-between items-center py-2 px-2 border-t light:border-blue-600">
                         {isFocus &&
