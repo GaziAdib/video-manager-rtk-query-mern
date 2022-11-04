@@ -7,7 +7,7 @@ import { useLikeVideoByAuthorMutation, useUnlikeVideoByAuthorMutation } from '..
 
 
 
-const LikeUnlike = () => {
+const LikeUnlike = ({ likes, authorId }) => {
 
 
     const { videoId } = useParams();
@@ -20,7 +20,6 @@ const LikeUnlike = () => {
 
     // like video function
     const likeVideoHandler = (id) => {
-        console.log('like')
         likeVideoByAuthor({
             videoId: id,
             authorId: user?._id
@@ -29,7 +28,6 @@ const LikeUnlike = () => {
 
     // unlike video function
     const unlikeVideoHandler = (id) => {
-        console.log('unlike')
         unlikeVideoByAuthor({
             videoId: id,
             authorId: user?._id
@@ -39,25 +37,25 @@ const LikeUnlike = () => {
     return (
         <div className="flex gap-6 w-48 ml-auto mt-1">
             <div className="flex gap-1">
-                <div className="shrink-0">
+                <div className={likes?.includes(user?._id) ? `w-7 block cursor-pointer bg-green-200 px-1 py-1 rounded-full` : ``}>
                     <img
                         onClick={() => likeVideoHandler(videoId)}
-                        className="w-5 block"
+                        className={`w-5 block cursor-pointer`}
                         src={likeImage}
                         alt="Like"
                     />
                 </div>
                 <div
-                    className="text-sm leading-[1.7142857] text-slate-600"
+                    className={likes?.includes(user?._id) ? `text-sm leading-[1.7142857] text-green-800` : `text-sm leading-[1.7142857] text-slate-600`}
                 >
-                    like
+                    {likes?.includes(user?._id) ? 'liked' : 'like'}
                 </div>
             </div>
             <div className="flex gap-1">
                 <div className="shrink-0">
                     <img
                         onClick={() => unlikeVideoHandler(videoId)}
-                        className="w-5 block"
+                        className="w-5 block cursor-pointer"
                         src={unlikeImage}
                         alt="Unlike"
                     />

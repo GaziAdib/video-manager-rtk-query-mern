@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import EditIcon from '../../assets/edit_icon.png';
 import DeleteIcon from '../../assets/delete_icon.png';
 import SocialShare from '../SocialShare/SocialShare';
+import { useState } from 'react';
+import ShareIcon from '../../assets/share_icon.png';
 
 
 const VideoDescription = ({ video }) => {
@@ -17,6 +19,7 @@ const VideoDescription = ({ video }) => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const [isShare, setIsShare] = useState(false);
 
     const { user } = useSelector((state) => state?.auth);
 
@@ -57,10 +60,11 @@ const VideoDescription = ({ video }) => {
                 </h2>
 
 
-                <LikeUnlike />
+                <LikeUnlike authorId={authorId} likes={likes} />
 
-                <SocialShare quote={title} shareVideoUrl={`https://react-interviwer.web.app/solutions`} />
 
+                {isShare && <SocialShare quote={title} shareVideoUrl={`https://react-interviwer.web.app/solutions`} />}
+                <button onClick={() => setIsShare(isShare ? false : true)}>{!isShare && <img src={ShareIcon} className="mr-5 ml-3  py-0.5 hover:bg-blue-200 rounded-full" width="30px" height="30px" />}</button>
 
             </div>
 
