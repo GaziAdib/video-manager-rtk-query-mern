@@ -53,10 +53,10 @@ export const commentsApi = rootApi.injectEndpoints({
             //         dispatch(
             //             rootApi.util.updateQueryData(
             //                 'fetchComments',
-            //                 args?.videoId,
+            //                 undefined,
             //                 (draft) => {
             //                     return draft.filter(
-            //                         (c) => c?._id != args && c?.video_id == args
+            //                         (c) => c?._id !== args
             //                     );
             //                 }
             //             )

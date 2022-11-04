@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { useDeleteCommentMutation } from '../../features/comments/commentsApi';
+import moment from 'moment';
 
 
 const CommentCard = ({ comment }) => {
@@ -29,7 +30,7 @@ const CommentCard = ({ comment }) => {
                 <img className="mt-2 rounded-full w-6 h-6 sm:w-10 sm:h-10" src={profileImage} alt="" />
             </div>
             <div className="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
-                <strong>{authorName}</strong> <span className="text-xs text-gray-400">{createdAt}</span>
+                <strong>{authorName}</strong> <span className="text-xs text-gray-400">{moment(createdAt).format('YYYY-MM-DD')}</span>
                 <p className="text-sm">
                     {content}
                 </p>
