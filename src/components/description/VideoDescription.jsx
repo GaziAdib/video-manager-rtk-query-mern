@@ -1,20 +1,22 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDeleteVideoMutation } from '../../features/videos/videosApi';
 import LikeUnlike from './LikeUnlike';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import EditIcon from '../../assets/edit_icon.png';
 import DeleteIcon from '../../assets/delete_icon.png';
+import SocialShare from '../SocialShare/SocialShare';
 
 
 const VideoDescription = ({ video }) => {
 
-    const { _id, title, createdAt, description, likeCount, unlikeCount, viewsCount, likes, authorId } = video || {};
+    const { _id, title, createdAt, description, viewsCount, likes, authorId } = video || {};
 
     const [deleteVideo, { isSuccess, isError, error }] = useDeleteVideoMutation() || {};
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const { user } = useSelector((state) => state?.auth);
 
@@ -34,28 +36,30 @@ const VideoDescription = ({ video }) => {
                 {title}
             </h1>
             <div
-                className="pb-4 flex items-center space-between border-b"
+                className="pb-4 flex items-center space-around border-b"
             >
                 <h2
-                    className="text-sm leading-[1.7142857] text-slate-600 w-24"
+                    className="text-sm leading-[1.7142857] text-slate-600 w-20"
                 >
                     {viewsCount} views
                 </h2>
 
                 <h2
-                    className="text-sm  text-slate-600 w-24"
+                    className="text-sm  text-slate-600 w-20"
                 >
                     {likes?.length > 0 ? likes?.length : '0'} likes
                 </h2>
 
                 <h2
-                    className="text-sm leading-[1.7142857] text-slate-600 w-24"
+                    className="text-sm text-slate-600 w-20"
                 >
                     {moment(createdAt).format('YYYY-MM-DD')}
                 </h2>
 
 
-                <LikeUnlike authorId={authorId} likes={likes} likeCount={likeCount} unlikeCount={unlikeCount} />
+                <LikeUnlike />
+
+                <SocialShare quote={title} shareVideoUrl={`https://react-interviwer.web.app/solutions`} />
 
 
             </div>

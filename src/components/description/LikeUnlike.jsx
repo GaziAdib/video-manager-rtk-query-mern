@@ -7,7 +7,7 @@ import { useLikeVideoByAuthorMutation, useUnlikeVideoByAuthorMutation } from '..
 
 
 
-const LikeUnlike = ({ likeCount, unlikeCount, authorId, likes }) => {
+const LikeUnlike = () => {
 
 
     const { videoId } = useParams();
@@ -37,7 +37,7 @@ const LikeUnlike = ({ likeCount, unlikeCount, authorId, likes }) => {
     }
 
     return (
-        <div className="flex gap-10 w-48 ml-auto mt-1">
+        <div className="flex gap-6 w-48 ml-auto mt-1">
             <div className="flex gap-1">
                 <div className="shrink-0">
                     <img
