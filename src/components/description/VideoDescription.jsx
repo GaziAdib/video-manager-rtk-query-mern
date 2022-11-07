@@ -9,11 +9,13 @@ import DeleteIcon from '../../assets/delete_icon.png';
 import SocialShare from '../SocialShare/SocialShare';
 import { useState } from 'react';
 import ShareIcon from '../../assets/share_icon.png';
-
+import parse from 'html-react-parser';
 
 const VideoDescription = ({ video }) => {
 
     const { _id, title, createdAt, description, viewsCount, likes, authorId } = video || {};
+
+    console.log(typeof (description));
 
     const [deleteVideo, { isSuccess, isError, error }] = useDeleteVideoMutation() || {};
 
@@ -71,7 +73,7 @@ const VideoDescription = ({ video }) => {
             <div
                 className="mt-4 text-sm text-[#334155] dark:text-slate-400"
             >
-                {description}
+                {parse(description)}
             </div>
 
             {user?._id === authorId ? (<button onClick={() => deleteVideoHandler(_id)} style={{ float: 'right' }} className="shadow mb-3 px-2  my-2 text-sm mt-1">

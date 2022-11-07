@@ -20,6 +20,7 @@ const AddVideo = () => {
   const [description, setDescription] = useState('');
   const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
+  const [videoSourceType, setVideoSourceType] = useState('');
 
 
   const submitHandler = (e) => {
@@ -29,6 +30,7 @@ const AddVideo = () => {
       addVideo({
         authorId: user?._id,
         title,
+        videoSourceType,
         category,
         description,
         thumbnailUrl,
@@ -54,8 +56,15 @@ const AddVideo = () => {
       <form onSubmit={submitHandler}>
         <div className="grid grid-cols-2 gap-4 max-w-xl m-auto">
 
-          <div className="col-span-2 lg:col-span-1">
+          <div className="col-span-2 lg:col-span-2">
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="border-solid border-slate-400 border-2 p-3 md:text-xl w-full rounded-lg" required placeholder="Title" />
+          </div>
+
+          <div className="col-span-2 lg:col-span-2">
+            <select value={videoSourceType} onChange={(e) => setVideoSourceType(e.target.value)} className="border-solid border-green-400 border-2 p-3 md:text-xl w-full rounded-lg" required>
+              <option value="youtube">YouTube</option>
+              <option value="facebook">Facebook</option>
+            </select>
           </div>
 
           <div className="col-span-2 lg:col-span-1">
@@ -102,7 +111,10 @@ const AddVideo = () => {
               }}
 
             />
+
           </div>
+
+
 
           <div className="col-span-2">
             <input type="text" value={thumbnailUrl} onChange={(e) => setThumbnailUrl(e.target.value)} className="border-solid border-slate-400 border-2 p-3 md:text-xl w-full rounded-lg" required placeholder="Thumnail Url" />

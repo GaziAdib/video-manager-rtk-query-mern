@@ -16,18 +16,20 @@ const Player = ({ videoUrl, title, autoplay }) => {
     //   allowFullScreen
     // ></iframe>
 
+    <div className='mt-2 mb-2'>
+      <ReactPlayer
+        url={videoUrl}
+        style={{ width: '100%', aspectRatio: 16 / 9 }}
+        controls
+        width="100%"
+        height="40%"
+        pip={true}
+        volume={true}
+        playing={autoplay}
+      />
+    </div>
 
-    <ReactPlayer
-      url={videoUrl}
-      style={{ width: '100%', aspectRatio: 16 / 9 }}
-      controls
-      width="100%"
-      height="40%"
-      pip={true}
-      volume={true}
-      playing={autoplay}
 
-    />
 
 
   )
