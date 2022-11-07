@@ -65,7 +65,7 @@ const VideoCard = ({ video }) => {
                 <div onMouseOver={onMouseHoverHandler} onMouseLeave={onMouseHoverRemove} className="relative">
                     <Link to={`videos/${_id}`}>
                         {hovered ? (
-                            <Player autoplay={hovered ? '1' : '0'} videoUrl={videoUrl} title={title} />
+                            <Player autoplay={hovered ? true : false} videoUrl={videoUrl} title={title} />
                         ) : (
                             <img
                                 id='videoThumnail'

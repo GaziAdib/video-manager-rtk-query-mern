@@ -12,6 +12,7 @@ import PublicRoute from './components/routes/PublicRoute';
 import PrivateRoute from './components/routes/PrivateRoute';
 import EditVideoPage from './pages/EditVideoPage';
 import useAuthCheck from './hooks/useAuthCheck';
+import FacebookVideoShowPage from './pages/FacebookVideoShowPage';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path='/login' element={<PublicRoute><LoginPage /></PublicRoute>} />
         <Route path='/register' element={<PublicRoute><RegistrationPage /></PublicRoute>} />
         <Route path='/' element={<HomePage />} />
+        <Route path='/facebook' element={<FacebookVideoShowPage />} />
         <Route path='/my-wishlist' element={<PrivateRoute><Wishlists /></PrivateRoute>} />
         <Route path='/videos/:videoId' element={<VideoDetailPage />} />
         <Route path='/videos/:videoId/update' element={<PrivateRoute><EditVideoPage /></PrivateRoute>} />
