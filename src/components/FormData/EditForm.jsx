@@ -16,6 +16,7 @@ const EditForm = ({ singleVideoData }) => {
         title: initialTitle,
         description: initialDescription,
         category: initialCategory,
+        videoSourceType: initialVideoSourceType,
         thumbnailUrl: initialThumbnailUrl,
         videoUrl: initialVideoUrl
     } = singleVideoData || {};
@@ -24,6 +25,7 @@ const EditForm = ({ singleVideoData }) => {
 
     const [title, setTitle] = useState(initialTitle);
     const [category, setCategory] = useState(initialCategory);
+    const [videoSourceType, setVideoSourceType] = useState(initialVideoSourceType);
     const [description, setDescription] = useState(initialDescription);
     const [thumbnailUrl, setThumbnailUrl] = useState(initialThumbnailUrl);
     const [videoUrl, setVideoUrl] = useState(initialVideoUrl);
@@ -38,6 +40,7 @@ const EditForm = ({ singleVideoData }) => {
                 data: {
                     title,
                     category,
+                    videoSourceType,
                     description,
                     thumbnailUrl,
                     videoUrl
@@ -64,6 +67,13 @@ const EditForm = ({ singleVideoData }) => {
 
                         <div className="col-span-2 lg:col-span-1">
                             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="border-solid border-purple-400 border-2 p-3 md:text-xl w-full" required placeholder="Title" />
+                        </div>
+
+                        <div className="col-span-2 lg:col-span-2">
+                            <select value={videoSourceType} onChange={(e) => setVideoSourceType(e.target.value)} className="border-solid border-green-400 border-2 p-3 md:text-xl w-full rounded-lg" required>
+                                <option selected={initialVideoSourceType === 'youtube'} value="youtube">YouTube</option>
+                                <option selected={initialVideoSourceType === 'facebook'} value="facebook">Facebook</option>
+                            </select>
                         </div>
 
                         <div className="col-span-2 lg:col-span-1">

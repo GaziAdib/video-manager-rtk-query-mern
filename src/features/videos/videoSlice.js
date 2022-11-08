@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     search: '',
+    videoType: '',
 };
 
 const videosSlice = createSlice({
@@ -12,7 +13,13 @@ const videosSlice = createSlice({
         search: (state, action) => {
             state.search = action.payload;
         },
-        clearSearch:(state) => {
+        videoTypeSelected: (state, action) => {
+            state.videoType = action.payload?.toLowerCase();
+        },
+        clearVideoType: (state, action) => {
+            state.videoType = '';
+        },
+        clearSearch: (state) => {
             state.search = ''
         }
     }
@@ -20,4 +27,4 @@ const videosSlice = createSlice({
 
 
 export default videosSlice.reducer;
-export const { search, clearSearch } = videosSlice.actions
+export const { search, clearSearch, videoTypeSelected, clearVideoType } = videosSlice.actions

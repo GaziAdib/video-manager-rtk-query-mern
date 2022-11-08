@@ -81,6 +81,7 @@ export const videosApi = rootApi.injectEndpoints({
                         Object.assign(video, {
                             _id: args?.videoId,
                             title: args?.data?.title,
+                            videoSourceType: args?.data?.videoSourceType,
                             category: args?.data?.category,
                             description: args?.data?.description,
                             thumbnailUrl: args?.data?.thumbnailUrl,
@@ -93,6 +94,7 @@ export const videosApi = rootApi.injectEndpoints({
                             const video = draft?.find((videoItem) => videoItem?._id === args?.videoId);
                             video._id = args?.videoId;
                             video.title = args?.data?.title;
+                            video.videoSourceType = args?.data?.videoSourceType
                             video.category = args?.data?.category;
                             video.description = args?.data?.description;
                             video.thumbnailUrl = args?.data?.thumbnailUrl;
