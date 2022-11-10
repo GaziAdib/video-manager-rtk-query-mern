@@ -13,9 +13,11 @@ const VideoCard = ({ video }) => {
     const [hovered, setHovered] = useState(false);
     /// end test
 
+
     const { _id, thumbnailUrl, title, likes, category, author, viewsCount, videoUrl, createdAt } = video;
 
     const { user } = useSelector((state) => state?.auth) || {};
+
     const { profileImage } = user || {};
 
 
