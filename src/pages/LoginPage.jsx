@@ -53,7 +53,7 @@ const LoginPage = () => {
                             />
                         </Link>
                         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                            Sign in to your account
+                            Login Page
                         </h2>
                     </div>
                     <form onSubmit={handleSubmit} className="mt-8 space-y-6">
@@ -115,6 +115,10 @@ const LoginPage = () => {
                             >
                                 Sign in
                             </button>
+                        </div>
+
+                        <div>
+                            <Link className='font-medium text-violet-600 hover:text-violet-500' to={'/password-reset'}><span>Forgot Password ?</span></Link>
                         </div>
 
                         {error !== '' && <Error message={error} />}
