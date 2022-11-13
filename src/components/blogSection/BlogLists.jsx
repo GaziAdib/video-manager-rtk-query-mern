@@ -28,17 +28,15 @@ const BlogLists = () => {
 
     return (
         <>
-            <section className="pt-4">
+            <section className="pt-3">
                 <section className="pt-3">
-                    <h1 className='text-center mx-auto text-green-600 my-1 py-1 font-medium font-bold'>Blogs</h1>
+                    <h1 className='text-center mx-auto text-green-600 my-1 py-1 font-medium font-bold'>All Blogs</h1>
                     <hr />
-                    <div
-                        className="grid grid-cols-4 gap-4 max-w-7xl mx-auto px-3 lg:px-0 min-h-[300px]"
-                    >
 
+                    <div class='flex flex-col mx-1 my-1 px-1 py-1 items-center justify-center min-h-screen'>
                         {content}
-
                     </div>
+
                 </section>
             </section>
 
