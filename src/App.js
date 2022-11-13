@@ -15,6 +15,8 @@ import useAuthCheck from './hooks/useAuthCheck';
 import PasswordResetPage from './pages/PasswordResetPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ErrorPage from './pages/ErrorPage';
+import AddBlogPage from './pages/AddBlogPage';
+import BlogLists from './components/blogSection/BlogLists';
 
 
 
@@ -36,6 +38,8 @@ function App() {
         <Route path='/videos/:videoId' element={<VideoDetailPage />} />
         <Route path='/videos/:videoId/update' element={<PrivateRoute><EditVideoPage /></PrivateRoute>} />
         <Route path='/addVideo' element={<PrivateRoute><AddVideo /></PrivateRoute>} />
+        <Route path='/addblog' element={<PrivateRoute><AddBlogPage /></PrivateRoute>} />
+        <Route path='/allblogs' element={<PrivateRoute><BlogLists /></PrivateRoute>} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

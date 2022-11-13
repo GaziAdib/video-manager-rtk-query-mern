@@ -10,7 +10,6 @@ const VideoLists = () => {
 
     const { search, videoType } = useSelector((state) => state?.videos);
 
-    console.log(videoType);
 
     const { data: searchedVideoResults } = useSearchByTitleQuery(search) || {};
 
@@ -69,7 +68,6 @@ const VideoLists = () => {
 
     }
 
-    // filter((item) => item?.videoSourceType === videoType)
 
 
     return (
