@@ -18,7 +18,7 @@ const BlogCard = ({ blog }) => {
                     </div>
                     <div class="flex items-center space-x-8">
                         <button class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">{blogCategory}</button>
-                        <div class="text-xs text-neutral-500">{moment(createdAt, 'YYYY-MM-DD').fromNow()}</div>
+                        <div class="text-xs text-neutral-500">{moment(createdAt).fromNow()}</div>
                     </div>
                 </div>
 
