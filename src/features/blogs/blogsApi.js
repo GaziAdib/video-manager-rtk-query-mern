@@ -7,9 +7,9 @@ export const blogsApi = rootApi.injectEndpoints({
             query: () => '/blogs/',
         }),
 
-        // fetchSingleVideo: builder.query({
-        //     query: (id) => `/videos/${id}`,
-        // }),
+        fetchSingleBlog: builder.query({
+            query: (blogId) => `/blogs/${blogId}`,
+        }),
 
         // create Video
         addBlog: builder.mutation({
@@ -120,4 +120,4 @@ export const blogsApi = rootApi.injectEndpoints({
 
 
 
-export const { useFetchBlogsQuery, useAddBlogMutation, useSearchBlogByTitleQuery } = blogsApi
+export const { useFetchBlogsQuery, useAddBlogMutation, useFetchSingleBlogQuery, useUpdateBlogMutation, useDeleteBlogMutation, useSearchBlogByTitleQuery } = blogsApi
