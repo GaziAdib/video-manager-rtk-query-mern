@@ -64,6 +64,7 @@ const Navbar = () => {
                 </div>
                 {search !== '' && <span className='ml-2 text-medium pl-1 pr-1 bg-red-200 text-red-600 rounded' onClick={handleClear}>Clear</span>}
                 <Link to={'/addVideo'}>AddVideo</Link>
+                <Link to={'/addBlog'}>AddBlogs</Link>
                 <Link to={'/my-wishlist'}>Wishlist ({lengthWishlist})</Link>
                 <div style={{ float: 'right' }}>
                     <button className='bg-red-600 text-white mx-1 my-1 px-1 py-1 rounded mx-auto lg:flex' onClick={logoutHandler}>Logout</button>
