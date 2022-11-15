@@ -1,13 +1,19 @@
 import React from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDeleteBlogMutation, useFetchSingleBlogQuery } from '../features/blogs/blogsApi';
 import moment from 'moment';
 import Parser from 'html-react-parser';
+import SocialShare from '../components/SocialShare/SocialShare';
 
 
 const BlogDetailPage = () => {
 
     const { blogId } = useParams();
+
+    const location = useLocation();
+    const path = location.pathname;
+    const finalUrlpath = `http://localhost:3000${path}`;
+
 
     const navigate = useNavigate();
 
@@ -30,7 +36,7 @@ const BlogDetailPage = () => {
 
         <>
             {!isLoading && !isError && singleBlog &&
-                <div className="rounded-xl border shadow items-center mx-auto p-4 mx-5 my-5 w-9/12 h-full bg-white">
+                <div className="rounded border shadow items-center content-center p-5 mx-5 my-5 w-12/12 bg-white">
                     <div className="flex w-full items-center justify-between border-b pb-3">
                         <div className="flex items-center space-x-3">
                             <div className="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div>
@@ -74,10 +80,13 @@ const BlogDetailPage = () => {
 
                                 <button className="mx-auto mt-2 mb-2 px-2 py-2 bg-red-600 text-white rounded-lg" onClick={() => deletBlogHandler(_id)}>Delete</button>
 
-
                             </div>
                         </div>
                     </div>
+
+                    <br />
+
+                    <SocialShare shareVideoUrl={finalUrlpath} quote={blogTitle} />
                 </div>}
 
         </>
