@@ -18,6 +18,7 @@ import ErrorPage from './pages/ErrorPage';
 import AddBlogPage from './pages/AddBlogPage';
 import BlogLists from './components/blogSection/BlogLists';
 import BlogDetailPage from './pages/BlogDetailPage';
+import EditBlogPage from './pages/EditBlogPage';
 
 
 
@@ -42,6 +43,7 @@ function App() {
         <Route path='/addblog' element={<PrivateRoute><AddBlogPage /></PrivateRoute>} />
         <Route path='/allblogs' element={<PrivateRoute><BlogLists /></PrivateRoute>} />
         <Route path='/blog/:blogId' element={<PrivateRoute><BlogDetailPage /></PrivateRoute>} />
+        <Route path='/blog/:blogId/update' element={<PrivateRoute><EditBlogPage /></PrivateRoute>} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
