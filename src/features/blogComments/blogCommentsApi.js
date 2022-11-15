@@ -1,13 +1,5 @@
 import { rootApi } from "../api/rootApi"
 
-router.get('/:id/getComments', getBlogComments)
-
-//add new blog comment
-router.post('/:id/addBlogComment', addBlogComment)
-
-//delete comment
-router.delete('/:id/blogComment/delete', deleteBlogCommentById)
-
 
 export const blogCommentsApi = rootApi.injectEndpoints({
     endpoints: (builder) => ({
