@@ -4,6 +4,8 @@ import { useDeleteBlogMutation, useFetchSingleBlogQuery } from '../features/blog
 import moment from 'moment';
 import Parser from 'html-react-parser';
 import SocialShare from '../components/SocialShare/SocialShare';
+import BlogCommentLists from '../components/blogCommentSection/BlogCommentLists';
+import AddBlogComment from '../components/blogCommentSection/AddBlogComment';
 
 
 const BlogDetailPage = () => {
@@ -82,8 +84,26 @@ const BlogDetailPage = () => {
 
                 </div>}
 
+
+            <div>
+                Add Comment Section
+
+                <br />
+
+                <AddBlogComment blogId={blogId} />
+
+            </div>
+
+            <br />
             <div>
                 COMMENT SECTION LIST
+
+                <br />
+
+                <BlogCommentLists blogId={blogId} />
+
+
+
             </div>
 
         </>

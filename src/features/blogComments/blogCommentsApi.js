@@ -9,10 +9,10 @@ export const blogCommentsApi = rootApi.injectEndpoints({
             providesTags: (result, error, arg) =>
                 result
                     ? [
-                        ...result.map(({ blogId }) => ({ type: "Comment", blogId })),
-                        "Comment",
+                        ...result.map(({ blogId }) => ({ type: "BlogComment", blogId })),
+                        "BlogComment",
                     ]
-                    : ["Comment"],
+                    : ["BlogComment"],
         }),
 
 
@@ -26,11 +26,11 @@ export const blogCommentsApi = rootApi.injectEndpoints({
             async onQueryStarted(args, { queryFulfilled, dispatch }) {
                 try {
 
-                    const { data: createdComment } = await queryFulfilled;
+                    const { data: createdBlogComment } = await queryFulfilled;
 
                     dispatch(
-                        rootApi.util.updateQueryData('fetchComments', args?.id, (draft) => {
-                            draft?.push(createdComment);
+                        rootApi.util.updateQueryData('fetchBlogComments', args?.blogId, (draft) => {
+                            draft?.push(createdBlogComment);
                         })
                     )
 
@@ -45,7 +45,7 @@ export const blogCommentsApi = rootApi.injectEndpoints({
                 url: `/blog/${blogId}/blogComment/delete`,
                 method: 'DELETE'
             }),
-            invalidatesTags: ['Comment']
+            invalidatesTags: ['BlogComment']
         })
     })
 })
