@@ -24,7 +24,7 @@ const Search = () => {
     e.preventDefault();
 
     path === '/' && dispatch(search(input));
-    path === '/allblogs' && dispatch(searchBlog());
+    path === '/allblogs' && dispatch(searchBlog(input));
     // video search
 
     // if (!match) {

@@ -62,7 +62,7 @@ const Navbar = () => {
 
             <div id='menuId' className="hidden items-center mx-5 my-1 text-black space-x-8 lg:flex">
                 <div id='search' className='rounded mx-auto my-2 mx-1 border-slate-200 border-dashed border-2 border-sky-500'>
-                    {currentPath === '/allblogs' ? <BlogSearch /> : <Search />}
+                    <Search />
                 </div>
                 {search !== '' && <span className='ml-2 text-medium pl-1 pr-1 bg-red-200 text-red-600 rounded' onClick={handleClear}>Clear</span>}
                 <Link to={'/addVideo'}>AddVideo</Link>
