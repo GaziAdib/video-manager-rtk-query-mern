@@ -1,22 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    search: ''
+    blogSearch: ''
 };
 
 const blogSlice = createSlice({
     name: 'blogs',
     initialState,
     reducers: {
-        search: (state, action) => {
-            state.search = action.payload;
+        searchBlog: (state, action) => {
+            state.blogSearch = action.payload;
         },
-        clearSearch: (state) => {
-            state.search = ''
+        clearBlogSearch: (state) => {
+            state.blogSearch = '';
         }
     }
 });
 
 
 export default blogSlice.reducer;
-export const { search, clearSearch } = blogSlice.actions;
+export const { searchBlog, clearBlogSearch } = blogSlice.actions;

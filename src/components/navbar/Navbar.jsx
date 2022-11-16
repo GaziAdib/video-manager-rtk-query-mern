@@ -1,21 +1,23 @@
 import React from 'react';
 import Search from './Search';
 import logoImage from '../../assets/lws.svg';
-import searchImage from '../../assets/search.svg';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { clearSearch } from '../../features/videos/videoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLoggedOut } from '../../features/auth/authSlice';
 import { useFetchAllWishlistsQuery } from '../../features/wishlists/wishlistsApi';
+import BlogSearch from './BlogSearch';
 
 const Navbar = () => {
 
     const { search } = useSelector((state) => state?.videos);
     const { user } = useSelector((state) => state?.auth);
 
+    const location = useLocation();
+
+    const currentPath = location.pathname;
 
     const dispatch = useDispatch();
-
 
     const { data: mywishlists, isError, isLoading, error } = useFetchAllWishlistsQuery() || {};
 
@@ -60,7 +62,7 @@ const Navbar = () => {
 
             <div id='menuId' className="hidden items-center mx-5 my-1 text-black space-x-8 lg:flex">
                 <div id='search' className='rounded mx-auto my-2 mx-1 border-slate-200 border-dashed border-2 border-sky-500'>
-                    <Search />
+                    {currentPath === '/allblogs' ? <BlogSearch /> : <Search />}
                 </div>
                 {search !== '' && <span className='ml-2 text-medium pl-1 pr-1 bg-red-200 text-red-600 rounded' onClick={handleClear}>Clear</span>}
                 <Link to={'/addVideo'}>AddVideo</Link>

@@ -37,7 +37,7 @@ const VideoLists = () => {
                     return <VideoCard key={video._id} video={video} />
                 }))
                 :
-                (searchedVideoResults?.map((video) => {
+                (searchedVideoResults?.length > 0 && searchedVideoResults?.map((video) => {
                     return <VideoCard key={video._id} video={video} />
                 }))
             )

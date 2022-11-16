@@ -1,11 +1,24 @@
 import React from 'react'
-import { useFetchBlogsQuery } from '../../features/blogs/blogsApi';
+import { useSelector } from 'react-redux';
+import { useFetchBlogsQuery, useSearchBlogByTitleQuery } from '../../features/blogs/blogsApi';
 import Loading from '../ui/Loading';
 import BlogCard from './BlogCard';
 
 const BlogLists = () => {
 
     const { data: blogs, isLoading, isError, error } = useFetchBlogsQuery() || {};
+
+    const { blogSearch } = useSelector((state) => state?.blogs);
+
+    console.log('blog search', blogSearch);
+
+    const { data: searchedBlogsResults, isError: blogSearchError, isLoading: isBlogSearchLoading, error: blogError } = useSearchBlogByTitleQuery(blogSearch) || {};
+
+    if (!isBlogSearchLoading) {
+        console.log('searched results blogs', searchedBlogsResults);
+    }
+
+
 
     let content;
 
@@ -19,9 +32,13 @@ const BlogLists = () => {
 
     if (!isError && !isLoading && blogs?.length > 0) {
 
-        content = blogs?.map((blog) => {
+        content = blogSearch === '' ? (
+            blogs?.map((blog) => {
+                return <BlogCard blog={blog} key={blog?._id} />
+            })
+        ) : (searchedBlogsResults?.length > 0 && searchedBlogsResults?.map((blog) => {
             return <BlogCard blog={blog} key={blog?._id} />
-        });
+        }))
 
     }
 

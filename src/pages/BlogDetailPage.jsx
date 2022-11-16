@@ -6,6 +6,7 @@ import Parser from 'html-react-parser';
 import SocialShare from '../components/SocialShare/SocialShare';
 import BlogCommentLists from '../components/blogCommentSection/BlogCommentLists';
 import AddBlogComment from '../components/blogCommentSection/AddBlogComment';
+import DeleteIcon from '../assets/delete_icon.svg';
 
 
 const BlogDetailPage = () => {
@@ -76,7 +77,10 @@ const BlogDetailPage = () => {
 
                                 <Link to={`/blog/${_id}/update`} className="px-2 py-2 my-auto bg-blue-200 text-center text-blue-600 rounded-lg">Edit</Link>
 
-                                <button className="mx-auto mt-2 mb-2 px-2 py-2 bg-red-600 text-white rounded-lg" onClick={() => deletBlogHandler(_id)}>Delete</button>
+
+                                <button className="mx-auto mt-2 mb-2 px-2 py-2 text-white" onClick={() => deletBlogHandler(_id)}>
+                                    <img src={DeleteIcon} height="20px" width="20px" />
+                                </button>
 
                             </div>
                         </div>

@@ -1,26 +1,35 @@
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { useMatch, useNavigate } from 'react-router-dom';
+import { useLocation, useMatch, useNavigate } from 'react-router-dom';
+import { searchBlog } from '../../features/blogs/blogSlice';
 import { search } from '../../features/videos/videoSlice';
 
 const Search = () => {
+
+  const location = useLocation();
+
+  const path = location.pathname;
+
   const dispatch = useDispatch();
 
   const [input, setInput] = useState('');
 
-  const match = useMatch("/");
+  // const match = useMatch("/");
   const navigate = useNavigate();
 
 
   // form on submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(search(input));
 
-    if (!match) {
-      navigate("/");
-    }
+    path === '/' && dispatch(search(input));
+    path === '/allblogs' && dispatch(searchBlog());
+    // video search
+
+    // if (!match) {
+    //   navigate("/");
+    // } 
   }
 
 
