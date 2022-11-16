@@ -6,16 +6,13 @@ import { clearSearch } from '../../features/videos/videoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLoggedOut } from '../../features/auth/authSlice';
 import { useFetchAllWishlistsQuery } from '../../features/wishlists/wishlistsApi';
-import BlogSearch from './BlogSearch';
+
 
 const Navbar = () => {
 
     const { search } = useSelector((state) => state?.videos);
     const { user } = useSelector((state) => state?.auth);
 
-    const location = useLocation();
-
-    const currentPath = location.pathname;
 
     const dispatch = useDispatch();
 

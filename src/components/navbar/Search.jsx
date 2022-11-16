@@ -16,7 +16,7 @@ const Search = () => {
   const [input, setInput] = useState('');
 
   // const match = useMatch("/");
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
 
   // form on submit
@@ -25,7 +25,7 @@ const Search = () => {
 
     path === '/' && dispatch(search(input));
     path === '/allblogs' && dispatch(searchBlog(input));
-    // video search
+
 
     // if (!match) {
     //   navigate("/");
