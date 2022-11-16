@@ -11,7 +11,7 @@ const blogSlice = createSlice({
         searchBlog: (state, action) => {
             state.blogSearch = action.payload;
         },
-        clearBlogSearch: (state) => {
+        clearSearchBlog: (state) => {
             state.blogSearch = '';
         }
     }
@@ -19,4 +19,4 @@ const blogSlice = createSlice({
 
 
 export default blogSlice.reducer;
-export const { searchBlog, clearBlogSearch } = blogSlice.actions;
+export const { searchBlog, clearSearchBlog } = blogSlice.actions

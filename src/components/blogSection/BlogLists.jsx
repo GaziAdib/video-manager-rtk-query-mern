@@ -6,18 +6,11 @@ import BlogCard from './BlogCard';
 
 const BlogLists = () => {
 
-    const { data: blogs, isLoading, isError, error } = useFetchBlogsQuery() || {};
-
     const { blogSearch } = useSelector((state) => state?.blogs);
 
-    console.log('blog search', blogSearch);
+    const { data: searchBlogResults, isError: blogSearchError, isLoading: blogSearchLoading } = useSearchBlogByTitleQuery(blogSearch) || {};
 
-    const { data: searchedBlogsResults, isError: blogSearchError, isLoading: isBlogSearchLoading, error: blogError } = useSearchBlogByTitleQuery(blogSearch) || {};
-
-    if (!isBlogSearchLoading) {
-        console.log('searched results blogs', searchedBlogsResults);
-    }
-
+    const { data: blogs, isLoading, isError, error } = useFetchBlogsQuery() || {};
 
 
     let content;
@@ -36,9 +29,12 @@ const BlogLists = () => {
             blogs?.map((blog) => {
                 return <BlogCard blog={blog} key={blog?._id} />
             })
-        ) : (searchedBlogsResults?.length > 0 && searchedBlogsResults?.map((blog) => {
-            return <BlogCard blog={blog} key={blog?._id} />
-        }))
+        ) : (
+            searchBlogResults?.length > 0 && searchBlogResults?.map((blog) => {
+                return <BlogCard blog={blog} key={blog?._id} />
+            })
+        )
+
 
     }
 

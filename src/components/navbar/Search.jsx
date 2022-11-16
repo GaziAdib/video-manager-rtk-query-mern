@@ -15,21 +15,28 @@ const Search = () => {
 
   const [input, setInput] = useState('');
 
-  // const match = useMatch("/");
-  //const navigate = useNavigate();
+  const matchRoot = useMatch("/");
+  const matchblogs = useMatch("/allblogs")
+  const navigate = useNavigate();
 
 
   // form on submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    path === '/' && dispatch(search(input));
+    // all blogs search
     path === '/allblogs' && dispatch(searchBlog(input));
 
+    //video search
+    path === '/' && dispatch(search(input));
 
-    // if (!match) {
-    //   navigate("/");
-    // } 
+
+    // if (matchRoot) {
+    //   navigate("/allblogs");
+    // }
+    // if (matchblogs) {
+    //   navigate('/allblogs')
+    // }
   }
 
 

@@ -107,8 +107,8 @@ export const blogsApi = rootApi.injectEndpoints({
             }
         }),
 
+        // search blogs
 
-        // search by title
         searchBlogByTitle: builder.query({
             query: (title) => `/blogs/search/${title}`
         })

@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from './Search';
 import logoImage from '../../assets/lws.svg';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { clearSearch } from '../../features/videos/videoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLoggedOut } from '../../features/auth/authSlice';
