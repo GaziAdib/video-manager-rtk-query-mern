@@ -19,6 +19,7 @@ import AddBlogPage from './pages/AddBlogPage';
 import BlogLists from './components/blogSection/BlogLists';
 import BlogDetailPage from './pages/BlogDetailPage';
 import EditBlogPage from './pages/EditBlogPage';
+import UserProfilePage from './pages/UserProfilePage';
 
 
 
@@ -36,6 +37,7 @@ function App() {
         <Route path='/password-reset' element={<PrivateRoute><PasswordResetPage /></PrivateRoute>} />
         <Route path='/forgotpassword/:id/:token' element={<PrivateRoute><ForgotPasswordPage /></PrivateRoute>} />
         <Route path='/' element={<HomePage />} />
+        <Route path='/user/profile/:userId' element={<PrivateRoute><UserProfilePage /></PrivateRoute>} />
         <Route path='/my-wishlist' element={<PrivateRoute><Wishlists /></PrivateRoute>} />
         <Route path='/videos/:videoId' element={<VideoDetailPage />} />
         <Route path='/videos/:videoId/update' element={<PrivateRoute><EditVideoPage /></PrivateRoute>} />
