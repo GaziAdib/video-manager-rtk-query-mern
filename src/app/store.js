@@ -6,6 +6,7 @@ import videoSlice from '../features/videos/videoSlice';
 import wishlistSlice from '../features/wishlists/wishlistSlice';
 import blogSlice from '../features/blogs/blogSlice';
 import blogCommentSlice from '../features/blogComments/blogCommentSlice';
+import profileSlice from '../features/profiles/profileSlice';
 
 
 export const store = configureStore({
@@ -16,7 +17,8 @@ export const store = configureStore({
     comments: commentSlice,
     auth: authSlice,
     blogs: blogSlice,
-    blogcomments: blogCommentSlice
+    blogcomments: blogCommentSlice,
+    profiles: profileSlice
   },
   devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddlewares) => getDefaultMiddlewares().concat(rootApi.middleware),
