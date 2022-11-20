@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import EditProfileForm from '../components/FormData/EditProfileForm';
+import { useFetchBlogsQuery } from '../features/blogs/blogsApi';
 import { useFetchUserProfileInfoQuery } from '../features/profiles/profileApi';
 import { useFetchVideosQuery } from '../features/videos/videosApi';
 
@@ -27,8 +28,13 @@ const UserProfilePage = () => {
     let facebookVideoViews = 0;
     let facebookVideoLikes = 0;
 
+    let allBlogs = 0;
+    let blogsCount = 0;
+
+
     // step 1 get videos
     const { data: videos } = useFetchVideosQuery() || {};
+    const { data: blogs } = useFetchBlogsQuery() || {};
 
     if (videos?.length > 0) {
         allVideos = videos?.filter((item) => item?.authorId === userInfo?._id);
@@ -48,8 +54,13 @@ const UserProfilePage = () => {
         facebookVideoViews = allFacebookVideos?.reduce((acc, item) => acc + item?.viewsCount, 0);
         facebookVideoLikes = allFacebookVideos?.reduce((acc, item) => acc + item?.likes?.length, 0);
 
-
     }
+
+    if (blogs?.length > 0) {
+        allBlogs = blogs?.filter((blog) => blog?.blogAuthorId === userId);
+        blogsCount = allBlogs?.length;
+    }
+
 
 
 
@@ -303,7 +314,7 @@ const UserProfilePage = () => {
                                                     <p
                                                         className="text-slate-900 text-sm font-semibold"
                                                     >
-                                                        title
+                                                        Blogs: {blogsCount}
 
                                                     </p>
                                                 </Link>
