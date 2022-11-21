@@ -4,7 +4,7 @@ export const wishlistsApi = rootApi.injectEndpoints({
     endpoints: (builder) => ({
         // fetch user based wish
         fetchWishlists: builder.query({
-            query: (id) => `/videos/wishlists/${id}/all`,
+            query: (userId) => `/videos/wishlists/${userId}/all`,
             // providesTags: ['Wish']
         }),
 

@@ -10,9 +10,9 @@ const wishlistSlice = createSlice({
     initialState,
     reducers: {
         addWishList: (state, action) => {
-            if(state?.wishlist) {
+            if (state?.wishlist) {
                 const existId = state?.wishlist?.find((item) => item?.id === action?.payload?.id);
-                if(!existId) {
+                if (!existId) {
                     state?.wishlist?.push(action?.payload);
                 } else {
                     alert('Cannot add multiple times! already added');
@@ -20,11 +20,11 @@ const wishlistSlice = createSlice({
             } else {
                 state.wishlist.push(action?.payload);
             }
-           },
-    
-           deleteWishItem: (state, action) => {
-                state.wishlist = state.wishlist?.filter((item) => item.id !== action.payload)
-           }
+        },
+
+        deleteWishItem: (state, action) => {
+            state.wishlist = state.wishlist?.filter((item) => item.id !== action.payload)
+        }
     }
 });
 

@@ -4,11 +4,13 @@ import EditProfileForm from '../components/FormData/EditProfileForm';
 import { useFetchBlogsQuery } from '../features/blogs/blogsApi';
 import { useFetchUserProfileInfoQuery } from '../features/profiles/profileApi';
 import { useFetchVideosQuery } from '../features/videos/videosApi';
+import { useFetchAllWishlistsQuery } from '../features/wishlists/wishlistsApi';
 
 const UserProfilePage = () => {
 
     const { userId } = useParams();
 
+    // get user info data for profile update
     const { data: userInfo, isLoading, isError, error } = useFetchUserProfileInfoQuery(userId);
 
     // dashboard For Current User
@@ -31,10 +33,14 @@ const UserProfilePage = () => {
     let allBlogs = 0;
     let blogsCount = 0;
 
+    let myWishlists = 0;
+    let wishlistCount = 0;
+
 
     // step 1 get videos
     const { data: videos } = useFetchVideosQuery() || {};
     const { data: blogs } = useFetchBlogsQuery() || {};
+    const { data: wishlists } = useFetchAllWishlistsQuery() || {};
 
     if (videos?.length > 0) {
         allVideos = videos?.filter((item) => item?.authorId === userInfo?._id);
@@ -56,13 +62,17 @@ const UserProfilePage = () => {
 
     }
 
+    // blogs data
     if (blogs?.length > 0) {
         allBlogs = blogs?.filter((blog) => blog?.blogAuthorId === userId);
         blogsCount = allBlogs?.length;
     }
 
-
-
+    // wishlists data
+    if (wishlists?.length > 0) {
+        myWishlists = wishlists?.filter((item) => item?.authorName === userInfo?.username);
+        wishlistCount = myWishlists?.length;
+    }
 
 
 
@@ -127,7 +137,7 @@ const UserProfilePage = () => {
                                                 <img
                                                     id='videoThumnail'
                                                     src="https://img.freepik.com/free-vector/flat-clapperboard-icon_1063-38.jpg"
-                                                    className="w-8/12 h-auto"
+                                                    className="w-12/12 h-auto"
                                                     alt={userInfo?.username}
                                                 />
 
@@ -182,7 +192,7 @@ const UserProfilePage = () => {
                                                 <img
                                                     id='videoThumnail'
                                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png"
-                                                    className="w-6/12 h-auto"
+                                                    className="w-12/12 h-auto"
                                                     alt={userInfo?.username}
 
                                                 />
@@ -237,7 +247,7 @@ const UserProfilePage = () => {
                                                 <img
                                                     id='videoThumnail'
                                                     src="https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png"
-                                                    className="w-8/12 h-auto"
+                                                    className="w-12/12 h-auto"
                                                     alt={userInfo?.username}
                                                 />
 
@@ -245,7 +255,7 @@ const UserProfilePage = () => {
 
                                         </div>
 
-                                        <div className="flex flex-row mt-2 gap-2">
+                                        <div className="flex flex-row mt-4 gap-3">
                                             <Link to={`/`} className="shrink-0">
                                                 <img
                                                     src={userInfo?.profileImage}
@@ -342,12 +352,12 @@ const UserProfilePage = () => {
                                 >
                                     <div className="w-full flex flex-col">
                                         <div className="relative">
-                                            <Link to={`/`}>
+                                            <Link to={`/my-wishlist`}>
 
                                                 <img
                                                     id='videoThumnail'
                                                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcg448jP0AJJEyApL6yzGV4IpFKqHqtEq9z7oOU9FMHqWqzMIZe5k9nsqEXyXESW3PCes&usqp=CAU"
-                                                    className="w-6/12 h-auto"
+                                                    className="w-12/12 h-auto"
                                                     alt={userInfo?.username}
                                                 />
 
@@ -356,7 +366,7 @@ const UserProfilePage = () => {
                                         </div>
 
                                         <div className="flex flex-row mt-2 gap-2">
-                                            <Link to={`/`} className="shrink-0">
+                                            <Link to={`/my-wishlist`} className="shrink-0">
                                                 <img
                                                     src={userInfo?.profileImage}
                                                     className="rounded-full h-6 w-6"
@@ -365,17 +375,17 @@ const UserProfilePage = () => {
                                             </Link>
 
                                             <div clas="flex flex-col">
-                                                <Link to={`/`}>
+                                                <Link to={`/my-wishlist`}>
                                                     <p
-                                                        className="text-slate-900 text-sm font-semibold"
+                                                        className="text-slate-900 text-xl font-semibold"
                                                     >
-                                                        title
+                                                        Wishlists Count: {wishlistCount}
 
                                                     </p>
                                                 </Link>
                                                 <Link
                                                     className="text-gray-400 text-xs mt-2 hover:text-gray-600"
-                                                    to={'/'}
+                                                    to={'/my-wishlist'}
                                                 // onClick={(e) => filterByAuthorHandler(author)}
 
                                                 >
