@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     search: '',
     videoType: '',
+    pageNumber: 1
 };
 
 const videosSlice = createSlice({
@@ -21,10 +22,13 @@ const videosSlice = createSlice({
         },
         clearSearch: (state) => {
             state.search = ''
+        },
+        changeCurrentPage: (state, action) => {
+            state.pageNumber = action.payload;
         }
     }
 });
 
 
 export default videosSlice.reducer;
-export const { search, clearSearch, videoTypeSelected, clearVideoType } = videosSlice.actions
+export const { search, clearSearch, videoTypeSelected, clearVideoType, changeCurrentPage } = videosSlice.actions

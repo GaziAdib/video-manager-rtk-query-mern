@@ -7,6 +7,10 @@ export const videosApi = rootApi.injectEndpoints({
             query: () => '/videos',
         }),
 
+        fetchPaginatedVideos: builder.query({
+            query: (pageNumber) => `/videos/paginatedvideos?page=${pageNumber}`
+        }),
+
         fetchSingleVideo: builder.query({
             query: (id) => `/videos/${id}`,
         }),
@@ -199,4 +203,4 @@ export const videosApi = rootApi.injectEndpoints({
 
 
 
-export const { useFetchVideosQuery, useFetchSingleVideoQuery, useAddVideosMutation, useDeleteVideoMutation, useUpdateVideoMutation, useLikeVideoByAuthorMutation, useUnlikeVideoByAuthorMutation, useSearchByTitleQuery } = videosApi
+export const { useFetchVideosQuery, useFetchPaginatedVideosQuery, useFetchSingleVideoQuery, useAddVideosMutation, useDeleteVideoMutation, useUpdateVideoMutation, useLikeVideoByAuthorMutation, useUnlikeVideoByAuthorMutation, useSearchByTitleQuery } = videosApi

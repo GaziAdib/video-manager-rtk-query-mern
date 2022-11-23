@@ -1,15 +1,19 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Loading from '../ui/Loading';
-import { useFetchVideosQuery, useSearchByTitleQuery } from '../../features/videos/videosApi';
+import { useFetchPaginatedVideosQuery, useFetchVideosQuery, useSearchByTitleQuery } from '../../features/videos/videosApi';
 import VideoCard from './VideoCard';
+import PaginationBox from '../ui/PaginationBox';
 
 const VideoLists = () => {
 
     const { data: videos, isLoading, isError, error } = useFetchVideosQuery() || {};
 
-    const { search, videoType } = useSelector((state) => state?.videos);
+    const { pageNumber } = useSelector((state) => state?.videos);
 
+    const { data: paginatedVideos, isLoading: paginatedVideoLoading, isError: paginatedVideoError, error: paginationError } = useFetchPaginatedVideosQuery(Number(pageNumber)) || {};
+
+    const { search, videoType } = useSelector((state) => state?.videos);
 
     const { data: searchedVideoResults } = useSearchByTitleQuery(search) || {};
 
@@ -19,15 +23,15 @@ const VideoLists = () => {
 
     if (!isLoading && isError) content = <div className="col-span-12">{error}</div>
 
-    if (!isError && !isLoading && videos?.length === 0) {
+    if (!isError && !isLoading && paginatedVideos?.data?.length === 0) {
         content = <div className="col-span-12">No Videos Found!</div>;
     }
 
-    if (!isError && !isLoading && videos?.length > 0) {
+    if (!isError && !isLoading && paginatedVideos?.data?.length > 0) {
 
         content = search === '' && videoType === '' ?
             (
-                videos?.map((video) => {
+                paginatedVideos?.data?.map((video) => {
                     return <VideoCard key={video._id} video={video} />
                 })
             )
@@ -81,6 +85,10 @@ const VideoLists = () => {
 
                 </div>
             </section>
+
+            {videoType === '' && search === '' && <PaginationBox currentPage={paginatedVideos?.currentPage} numberOfPages={paginatedVideos?.numberOfPages} />}
+
+
         </section>
     )
 }
