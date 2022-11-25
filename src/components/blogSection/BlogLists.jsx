@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { useFetchBlogsQuery, useSearchBlogByTitleQuery } from '../../features/blogs/blogsApi';
+import { useFetchBlogsQuery, useFetchPaginatedBlogsQuery, useSearchBlogByTitleQuery } from '../../features/blogs/blogsApi';
 import Loading from '../ui/Loading';
+import PaginationBlogBox from '../ui/PaginationBlogBox';
 import BlogCard from './BlogCard';
 
 const BlogLists = () => {
@@ -11,6 +12,13 @@ const BlogLists = () => {
     const { data: searchBlogResults, isError: blogSearchError, isLoading: blogSearchLoading } = useSearchBlogByTitleQuery(blogSearch) || {};
 
     const { data: blogs, isLoading, isError, error } = useFetchBlogsQuery() || {};
+
+    // let pageNumber = 1;
+
+    const { pageNumber } = useSelector((state) => state?.blogs)
+
+    const { data: paginatedBlogs } = useFetchPaginatedBlogsQuery(Number(pageNumber));
+
 
 
     let content;
@@ -26,7 +34,7 @@ const BlogLists = () => {
     if (!isError && !isLoading && blogs?.length > 0) {
 
         content = blogSearch === '' ? (
-            blogs?.map((blog) => {
+            paginatedBlogs?.data?.map((blog) => {
                 return <BlogCard blog={blog} key={blog?._id} />
             })
         ) : (
@@ -51,6 +59,9 @@ const BlogLists = () => {
                     </div>
 
                 </section>
+
+                <PaginationBlogBox currentPage={paginatedBlogs?.currentPage} numberOfPages={paginatedBlogs?.numberOfPages} />
+
             </section>
 
 

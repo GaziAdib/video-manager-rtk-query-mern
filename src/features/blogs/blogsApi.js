@@ -7,9 +7,21 @@ export const blogsApi = rootApi.injectEndpoints({
             query: () => '/blogs/',
         }),
 
+
+        // get paginated blogs
+
+        fetchPaginatedBlogs: builder.query({
+            query: (pageNumber) => `/blogs/paginatedBlogs?page=${pageNumber}`,
+        }),
+
+
+
         fetchSingleBlog: builder.query({
             query: (blogId) => `/blogs/${blogId}`,
         }),
+
+
+
 
         // create Video
         addBlog: builder.mutation({
@@ -120,4 +132,4 @@ export const blogsApi = rootApi.injectEndpoints({
 
 
 
-export const { useFetchBlogsQuery, useAddBlogMutation, useFetchSingleBlogQuery, useUpdateBlogMutation, useDeleteBlogMutation, useSearchBlogByTitleQuery } = blogsApi
+export const { useFetchBlogsQuery, useFetchPaginatedBlogsQuery, useAddBlogMutation, useFetchSingleBlogQuery, useUpdateBlogMutation, useDeleteBlogMutation, useSearchBlogByTitleQuery } = blogsApi

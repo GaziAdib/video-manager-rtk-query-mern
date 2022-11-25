@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    blogSearch: ''
+    blogSearch: '',
+    pageNumber: 1
 };
 
 const blogSlice = createSlice({
@@ -13,10 +14,13 @@ const blogSlice = createSlice({
         },
         clearSearchBlog: (state) => {
             state.blogSearch = '';
+        },
+        changePageNumber: (state, action) => {
+            state.pageNumber = action.payload;
         }
     }
 });
 
 
 export default blogSlice.reducer;
-export const { searchBlog, clearSearchBlog } = blogSlice.actions
+export const { searchBlog, clearSearchBlog, changePageNumber } = blogSlice.actions
