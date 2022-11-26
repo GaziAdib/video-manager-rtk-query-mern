@@ -1,14 +1,23 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { changePageNumber } from '../../features/blogs/blogSlice';
 import { changeCurrentPage } from '../../features/videos/videoSlice';
 
 const PaginationBox = ({ currentPage, numberOfPages }) => {
 
     const dispatch = useDispatch();
 
+    const location = useLocation();
+    const path = location?.pathname;
+
+
     const changeCurrentPageNumberInc = (pageCurrent) => {
         if (Number(pageCurrent) < Number(numberOfPages)) {
-            dispatch(changeCurrentPage(pageCurrent + 1));
+
+            path === '/' && dispatch(changeCurrentPage(pageCurrent + 1));
+            path === '/allblogs' && dispatch(changePageNumber(pageCurrent + 1));
+
         } else if (Number(pageCurrent) === Number(numberOfPages)) {
             alert('cannot increase more')
         }
@@ -18,7 +27,8 @@ const PaginationBox = ({ currentPage, numberOfPages }) => {
         if (Number(pageCurrent) === 1) {
             alert('cannot go back its page 1');
         } else {
-            dispatch(changeCurrentPage(pageCurrent - 1));
+            path === '/' && dispatch(changeCurrentPage(pageCurrent - 1));
+            path === '/allblogs' && dispatch(changePageNumber(pageCurrent - 1));
         }
     }
 

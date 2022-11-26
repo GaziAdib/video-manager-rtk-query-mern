@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useFetchBlogsQuery, useFetchPaginatedBlogsQuery, useSearchBlogByTitleQuery } from '../../features/blogs/blogsApi';
 import Loading from '../ui/Loading';
 import PaginationBlogBox from '../ui/PaginationBlogBox';
+import PaginationBox from '../ui/PaginationBox';
 import BlogCard from './BlogCard';
 
 const BlogLists = () => {
@@ -13,9 +14,8 @@ const BlogLists = () => {
 
     const { data: blogs, isLoading, isError, error } = useFetchBlogsQuery() || {};
 
-    // let pageNumber = 1;
 
-    const { pageNumber } = useSelector((state) => state?.blogs)
+    const { pageNumber } = useSelector((state) => state?.blogs);
 
     const { data: paginatedBlogs } = useFetchPaginatedBlogsQuery(Number(pageNumber));
 
@@ -60,7 +60,7 @@ const BlogLists = () => {
 
                 </section>
 
-                <PaginationBlogBox currentPage={paginatedBlogs?.currentPage} numberOfPages={paginatedBlogs?.numberOfPages} />
+                <PaginationBox currentPage={paginatedBlogs?.currentPage} numberOfPages={paginatedBlogs?.numberOfPages} />
 
             </section>
 
