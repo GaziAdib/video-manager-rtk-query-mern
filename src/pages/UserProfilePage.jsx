@@ -166,7 +166,7 @@ const UserProfilePage = () => {
                         </div>
                     </div>
 
-                    <section className="pt-5 rounded-lg mx-auto shadow border-2 border-dashed">
+                    <section className="pt-5 rounded-lg mx-auto shadow  border-dashed">
                         <section className="px-5 mx-auto my-2 py-2 items-center">
                             <div
                                 className="grid grid-cols-12 gap-6 max-w-7xl mx-auto px-5 lg:px-0 min-h-[300px] mb-5"
