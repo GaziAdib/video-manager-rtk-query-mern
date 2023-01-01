@@ -25,8 +25,8 @@ import UserProfilePage from './pages/UserProfilePage';
 
 
 function App() {
-  const authChecked = useAuthCheck();
 
+  const authChecked = useAuthCheck();
 
   return !authChecked ? <div>Checking Authentication</div> : (
     <Router>
