@@ -180,7 +180,7 @@ const UserProfilePage = () => {
                                 <div
                                     className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]"
                                 >
-                                    <div className="w-full flex flex-col">
+                                    <div className="items-center px-2 py-2 rounded-sm shadow-md  border-b-4 border-blue-400 w-full flex flex-col">
                                         <div className="relative mx-auto">
                                             <Link to={`/`}>
 
@@ -235,7 +235,7 @@ const UserProfilePage = () => {
                                 <div
                                     className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]"
                                 >
-                                    <div className="w-full flex flex-col">
+                                    <div className="items-center px-2 py-2 rounded-sm shadow-md  border-b-4 border-red-400 w-full flex flex-col">
                                         <div className="relative mx-auto">
                                             <Link to={`/`}>
 
@@ -290,7 +290,7 @@ const UserProfilePage = () => {
                                 <div
                                     className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]"
                                 >
-                                    <div className="w-full flex flex-col">
+                                    <div className="items-center px-2 py-2 rounded-sm shadow-md  border-b-4 border-blue-600 w-full flex flex-col">
                                         <div className="relative mx-auto">
                                             <Link to={`/`}>
 
@@ -345,7 +345,7 @@ const UserProfilePage = () => {
                                 <div
                                     className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]"
                                 >
-                                    <div className="w-full flex flex-col">
+                                    <div className="items-center px-2 py-2 rounded-sm shadow-md  border-b-4 border-orange-400 w-full flex flex-col">
                                         <div className="relative mx-auto">
                                             <Link to={`/`}>
 
@@ -400,7 +400,7 @@ const UserProfilePage = () => {
                                 <div
                                     className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]"
                                 >
-                                    <div className="w-full flex flex-col">
+                                    <div className="items-center px-2 py-2 rounded-sm shadow-md  border-b-4 border-rose-600 w-full flex flex-col">
                                         <div className="relative mx-auto">
                                             <Link to={`/my-wishlist`}>
 
