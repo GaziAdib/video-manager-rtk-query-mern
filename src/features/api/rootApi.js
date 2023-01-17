@@ -12,7 +12,6 @@ export const rootApi = createApi({
                 headers.set('authorization', `Bearer ${token}`);
             }
             return headers;
-
         }
     }),
     endpoints: (builder) => ({}),

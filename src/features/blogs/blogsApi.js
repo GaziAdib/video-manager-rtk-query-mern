@@ -8,22 +8,14 @@ export const blogsApi = rootApi.injectEndpoints({
         }),
 
 
-        // get paginated blogs
-
         fetchPaginatedBlogs: builder.query({
             query: (pageNumber) => `/blogs/paginatedBlogs?page=${pageNumber}`,
         }),
 
-
-
         fetchSingleBlog: builder.query({
             query: (blogId) => `/blogs/${blogId}`,
         }),
-
-
-
-
-        // create Video
+        // create Blogs
         addBlog: builder.mutation({
             query: (data) => ({
                 url: '/blogs/createBlog',
@@ -118,9 +110,7 @@ export const blogsApi = rootApi.injectEndpoints({
                 }
             }
         }),
-
         // search blogs
-
         searchBlogByTitle: builder.query({
             query: (title) => `/blogs/search/${title}`
         })

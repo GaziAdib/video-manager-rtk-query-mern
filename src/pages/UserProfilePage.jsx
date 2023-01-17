@@ -372,14 +372,14 @@ const UserProfilePage = () => {
                                             <div clas="flex flex-col">
                                                 <Link to={`/`}>
                                                     <p
-                                                        className="text-slate-900 text-sm font-semibold"
+                                                        className="text-slate-900 text-xl font-semibold"
                                                     >
                                                         Blogs: {blogsCount}
 
                                                     </p>
                                                 </Link>
                                                 <Link
-                                                    className="text-gray-400 text-xs mt-2 hover:text-gray-600"
+                                                    className="text-gray-400 text-xl mt-2 hover:text-gray-600"
                                                     to={'/'}
                                                 // onClick={(e) => filterByAuthorHandler(author)}
 
@@ -387,7 +387,7 @@ const UserProfilePage = () => {
                                                     {userInfo?.username}
 
                                                 </Link>
-                                                <p className="text-gray-400 text-xs mt-1">
+                                                <p className="text-gray-400 text-xl mt-1">
                                                     views, likes, comment
                                                 </p>
 
@@ -434,7 +434,7 @@ const UserProfilePage = () => {
                                                     </p>
                                                 </Link>
                                                 <Link
-                                                    className="text-gray-400 text-xs mt-2 hover:text-gray-600"
+                                                    className="text-gray-400 text-xl mt-2 hover:text-gray-600"
                                                     to={'/my-wishlist'}
                                                 // onClick={(e) => filterByAuthorHandler(author)}
 
@@ -442,7 +442,7 @@ const UserProfilePage = () => {
                                                     {userInfo?.username}
 
                                                 </Link>
-                                                <p className="text-gray-400 text-xs mt-1">
+                                                <p className="text-gray-400 text-xl mt-1">
                                                     views, likes, comment
                                                 </p>
 
